@@ -6,6 +6,7 @@ namespace B15_Ex01_1
 {
     class Board
     {
+        //Commet to check
         private char[,] m_board;
         private int m_numOfColsInBoard = 0;
         private int m_numOfRowsInBoard = 0;
