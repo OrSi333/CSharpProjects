@@ -1,0 +1,12 @@
+D:\Drives\Mega Drive\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\obj\Debug\B15_Ex01_1.csprojResolveAssemblyReference.cache
+D:\Drives\Mega Drive\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\B15_Ex01_1.exe
+D:\Drives\Mega Drive\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\B15_Ex01_1.pdb
+D:\Drives\Mega Drive\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\Ex02.ConsoleUtils.dll
+D:\Drives\Mega Drive\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\obj\Debug\B15_Ex01_1.exe
+D:\Drives\Mega Drive\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\obj\Debug\B15_Ex01_1.pdb
+C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\obj\Debug\B15_Ex01_1.exe
+C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\obj\Debug\B15_Ex01_1.pdb
+C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\B15_Ex01_1.exe
+C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\B15_Ex01_1.pdb
+C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\Ex02.ConsoleUtils.dll
+C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\obj\Debug\B15_Ex01_1.csprojResolveAssemblyReference.cache
