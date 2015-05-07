@@ -9,7 +9,7 @@ namespace B15_Ex01_1
     {
         static void Main()
         {
-            while (true)
+             while (true)
             {
                 int numOfplayers;
                 string firstPlayerName;
@@ -71,7 +71,9 @@ please enter your name and press 'enter': ");
                     board = new Board(27, 14);
                 }
 
-                PrintBoard(board);
+
+
+                Console.WriteLine(BoardFormat.GetBoardStringRepresentation(board));
                 Console.ReadLine();
             }        
         }
@@ -93,20 +95,6 @@ please enter your name and press 'enter': ");
             }
 
             return isValid;
-        }
-
-        private static void PrintBoard(Board board)
-        {
-            char[,] boardToPrint = board.getBoard;
-
-            for (int i = 0; i < board.getNumOfRowsInBoard; i++)
-            {
-                for (int j = 0; j < board.getNumofColsInBoard; j++)
-                {
-                    Console.Write(string.Format("{0}", boardToPrint[i, j]));
-                }
-                Console.WriteLine();
-            }
         }
     }
 }
