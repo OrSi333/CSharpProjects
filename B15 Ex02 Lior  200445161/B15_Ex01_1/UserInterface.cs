@@ -15,12 +15,12 @@ namespace B15_Ex02_1
         private const string k_EnterSizeOfBoard = "Please enter the desired size of board: '8' or '6'"; // should change it to  something better later.
         private const string k_InvalidSizeOfBoard = "Invalid board size, please try again.";
 
-        private string firstPlayerName;
-        private string secondPlayerName;
-        private short numOfPlayers;
-        private short sizeOfBoard;
+        private static string firstPlayerName;
+        private static string secondPlayerName;
+        private static short numOfPlayers;
+        private static short sizeOfBoard;
 
-        public void GetUserInput()
+        public static void GetUserInput()
         {
             Console.WriteLine(k_WelcomeMessege);
             Console.WriteLine(k_EnterFirstPlayerName);
@@ -28,7 +28,7 @@ namespace B15_Ex02_1
             Console.WriteLine(k_HowManyPlayers);
 
             bool validNumOfPlayers = false;
-            while (validNumOfPlayers)
+            while (!validNumOfPlayers)
             {
                 // Checking if the input of the user is valid
                 validNumOfPlayers = short.TryParse(Console.ReadLine(), out numOfPlayers);
@@ -40,6 +40,7 @@ namespace B15_Ex02_1
                 }
                 else
                 {
+                    validNumOfPlayers = false;
                     Console.WriteLine(k_InvalidNumOfPlayers);
                 }
             }
@@ -51,7 +52,7 @@ namespace B15_Ex02_1
             }
 
             bool validSizeOfBoard = false;
-            while (validSizeOfBoard) 
+            while (!validSizeOfBoard) 
             {
                 Console.WriteLine(k_EnterSizeOfBoard);
                 validSizeOfBoard = short.TryParse(Console.ReadLine(), out sizeOfBoard);
@@ -62,16 +63,25 @@ namespace B15_Ex02_1
                 }
                 else
                 {
-                  Console.WriteLine(k_InvalidSizeOfBoard);
+                    validSizeOfBoard = false;
+                    Console.WriteLine(k_InvalidSizeOfBoard);
                 }
             }
         }
 
-        public short GetNumberOfPlayer
+        public static short GetNumberOfPlayer
         {
             get
             {
                 return numOfPlayers;
+            }
+        }
+
+        public static short getSizeOfBoard
+        {
+            get
+            {
+                return sizeOfBoard;
             }
         }
     }

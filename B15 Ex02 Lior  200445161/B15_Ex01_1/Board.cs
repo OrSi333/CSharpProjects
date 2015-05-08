@@ -36,7 +36,7 @@ namespace B15_Ex02_1
 
         public Cell getCellAtPos(Position i_Position)
         {
-            return this.m_Board[i_Position.Row, i_Position.Col]; ;
+            return this.m_Board[i_Position.Row, i_Position.Col]; 
         }
  
         public int getSizeOfBoard

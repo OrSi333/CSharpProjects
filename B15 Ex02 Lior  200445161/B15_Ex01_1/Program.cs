@@ -9,17 +9,15 @@ namespace B15_Ex02_1
     {
         static void Main()
         {
-            int numOfplayers;
-            string firstPlayerName;
-            string secondPlayerName;
-            int sizeOfBoard;
             Board board;
 
+            UserInterface.GetUserInput();
+
             
-            board = new Board(UserInterface.)
+            board = new Board(UserInterface.getSizeOfBoard);
             Console.WriteLine(BoardFormat.GetBoardStringRepresentation(board));
             Console.ReadLine();
-
+        }
         private static bool validateName(string i_playerName)
         {
             bool isValid = true;
