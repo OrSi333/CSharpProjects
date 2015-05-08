@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace B15_Ex01_1
+namespace B15_Ex02_1
 {
     public class Position
     {

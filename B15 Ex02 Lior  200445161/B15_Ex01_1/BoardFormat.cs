@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace B15_Ex01_1
+namespace B15_Ex02_1
 {
     public static class BoardFormat
     {
@@ -11,10 +11,10 @@ namespace B15_Ex01_1
             StringBuilder boardToString = new StringBuilder();
 
             boardToString.Append("  ");
-            boardToString.Append(getColumnLetters(i_Board.getNumofColsInBoard));
+            boardToString.Append(getColumnLetters(i_Board.getSizeOfBoard));
             boardToString.Append(Environment.NewLine);
 
-            boardToString.Append(getEqualLine(i_Board.getNumofColsInBoard));
+            boardToString.Append(getEqualLine(i_Board.getSizeOfBoard));
             boardToString.Append(Environment.NewLine);
             boardToString.Append(boardLines(i_Board));
 
@@ -25,17 +25,17 @@ namespace B15_Ex01_1
         {
             StringBuilder lines = new StringBuilder();
 
-            for (int row = 0; row < i_Board.getNumOfRowsInBoard; row++)
+            for (int row = 0; row < i_Board.getSizeOfBoard; row++)
             {
                 lines.Append(string.Format("{0} ", (row + 1).ToString()));
 
-                for (int col = 0; col < i_Board.getNumofColsInBoard; col++)
+                for (int col = 0; col < i_Board.getSizeOfBoard; col++)
                 {
                     lines.Append(string.Format("|{0}", CellToPrint(i_Board.getCellAtPos(new Position(row, col)))));
                 }
 
                 lines.Append(string.Format("|{0}", Environment.NewLine));
-                lines.Append(getEqualLine(i_Board.getNumofColsInBoard) + Environment.NewLine);
+                lines.Append(getEqualLine(i_Board.getSizeOfBoard) + Environment.NewLine);
             }
 
             return lines.ToString();

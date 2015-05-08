@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace B15_Ex01_1
+namespace B15_Ex02_1
 {
     class Program
     {
@@ -15,70 +15,10 @@ namespace B15_Ex01_1
             int sizeOfBoard;
             Board board;
 
-             while (true)
-            {
-
-
-                Console.WriteLine(
- @"Welcome to Otlo Game!
-please enter your name and press 'enter': ");
-
-                firstPlayerName = Console.ReadLine();
-             
-                if (!validateName(firstPlayerName))
-                {
-                    Console.WriteLine("Invalid name, please try again.");
-                    continue;
-                }
-
-                Console.WriteLine("how many players play? (1 or 2) ");
-                string playersStr = Console.ReadLine();
-                
-                if (!int.TryParse(playersStr, out numOfplayers))
-                {
-                    Console.WriteLine("Invalid number of players, please try again.");
-                    continue;
-                }
-
-                if (numOfplayers != 2 && numOfplayers != 1)
-                {
-                    Console.WriteLine("Invalid number of players, please try again.");
-                    continue;
-                }
-
-                if (numOfplayers == 2)
-                {
-                    Console.WriteLine("Please enter the second player name: ");
-                    secondPlayerName = Console.ReadLine();
-                    if (!validateName(secondPlayerName))
-                    {
-                        Console.WriteLine("Invalid name, please try again.");
-                        continue;
-                    }
-                }
-
-                Console.WriteLine("What is the size of the board you like to with? 8 or 6?");
-
-                if (!int.TryParse(Console.ReadLine(), out sizeOfBoard))
-                {
-                    Console.WriteLine("Invalid size of board, please try again");
-                }
-
-                if (sizeOfBoard == 8)
-                {
-                    board = new Board(8, 8);
-                }
-                else
-                {
-                    board = new Board(6, 6);
-                }
-
-
-
-                Console.WriteLine(BoardFormat.GetBoardStringRepresentation(board));
-                Console.ReadLine();
-            }        
-        }
+            
+            board = new Board(UserInterface.)
+            Console.WriteLine(BoardFormat.GetBoardStringRepresentation(board));
+            Console.ReadLine();
 
         private static bool validateName(string i_playerName)
         {

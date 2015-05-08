@@ -7,7 +7,7 @@
     <ProjectGuid>{E91E6921-F9DB-47A2-B541-131D6D150360}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>B15_Ex01_1</RootNamespace>
+    <RootNamespace>B15_Ex02_1</RootNamespace>
     <AssemblyName>B15_Ex01_1</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
