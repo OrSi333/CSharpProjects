@@ -9,13 +9,15 @@ namespace B15_Ex01_1
     {
         static void Main()
         {
+            int numOfplayers;
+            string firstPlayerName;
+            string secondPlayerName;
+            int sizeOfBoard;
+            Board board;
+
              while (true)
             {
-                int numOfplayers;
-                string firstPlayerName;
-                string secondPlayerName;
-                int sizeOfBoard;
-                Board board;
+
 
                 Console.WriteLine(
  @"Welcome to Otlo Game!
@@ -64,11 +66,11 @@ please enter your name and press 'enter': ");
 
                 if (sizeOfBoard == 8)
                 {
-                    board = new Board(35, 18);
+                    board = new Board(8, 8);
                 }
                 else
                 {
-                    board = new Board(27, 14);
+                    board = new Board(6, 6);
                 }
 
 

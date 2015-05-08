@@ -17,7 +17,6 @@ namespace B15_Ex01_1
             boardToString.Append(getEqualLine(i_Board.getNumofColsInBoard));
             boardToString.Append(Environment.NewLine);
             boardToString.Append(boardLines(i_Board));
-            boardToString.Append(getEqualLine(i_Board.getNumofColsInBoard));
 
             return boardToString.ToString();
         }
@@ -36,6 +35,7 @@ namespace B15_Ex01_1
                 }
 
                 lines.Append(string.Format("|{0}", Environment.NewLine));
+                lines.Append(getEqualLine(i_Board.getNumofColsInBoard) + Environment.NewLine);
             }
 
             return lines.ToString();
@@ -44,6 +44,7 @@ namespace B15_Ex01_1
         private static string getEqualLine(int i_numberOfColums)
         {
             StringBuilder equalLine = new StringBuilder();
+            equalLine.Append("  ");
 
             for (int i = 0; i < i_numberOfColums; i++)
             {
@@ -61,7 +62,7 @@ namespace B15_Ex01_1
 
             for (int i = 0; i < i_numberOfColumns; i++)
             {
-                columnLetters.Append(string.Format("  {0}  ", letter));
+                columnLetters.Append(string.Format("  {0} ", letter));
 
                 // Advancing to the next letter 
                 letter = (char)(((int)letter) + 1);
