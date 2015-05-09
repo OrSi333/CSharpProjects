@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace B15_Ex02_1
 {
@@ -12,6 +11,7 @@ namespace B15_Ex02_1
             UserInterface.GetUserInput();
 
             Board board = new Board(UserInterface.getSizeOfBoard);
+
             Console.WriteLine(BoardFormat.GetBoardStringRepresentation(board));
             Console.ReadLine();
         }
