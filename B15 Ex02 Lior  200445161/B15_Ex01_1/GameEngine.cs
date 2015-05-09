@@ -4,7 +4,7 @@ using System.Text;
 
 namespace B15_Ex02_1
 {
-    class GameEngine
+   public class GameEngine
     {
         Board m_Board;
 
