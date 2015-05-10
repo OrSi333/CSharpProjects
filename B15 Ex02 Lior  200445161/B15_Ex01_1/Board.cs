@@ -15,7 +15,7 @@ namespace B15_Ex02_1
             initializeBoard();
         }
 
-        private void initializeBoard()
+        public void initializeBoard()
         {
             for (int row = 0; row < m_SizeOfBoard; row++) 
 			{

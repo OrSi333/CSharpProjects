@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace B15_Ex02_1
 {
-    public static class ValidateInput
+    public static class InputValidator
     {
         public static bool isValidName(string i_name, out string o_name)
         {
@@ -13,13 +13,13 @@ namespace B15_Ex02_1
 
             // Trimming white space in the given string
             string nameWithoutMultiplySpaces = Regex.Replace(i_name, @"\s+", " ");
+            o_name = nameWithoutMultiplySpaces;
 
-            if (nameWithoutMultiplySpaces.Length > 15)
+            // Making sure the name contains less than or exactly 15 characters
+            if (o_name.Length > 15)
             {
                 validName = false;
             }
-
-            o_name = nameWithoutMultiplySpaces;
 
             return validName;
         }
@@ -52,8 +52,9 @@ namespace B15_Ex02_1
 
         public static bool isValidMoveInput(string i_Move)
         {
-            // TODO 
-            return false;
+            bool isValidMove = Regex.IsMatch(i_Move, @"([A-Z],[0-9])", RegexOptions.IgnoreCase);
+
+            return isValidMove;
         }
     }
 }

@@ -14,74 +14,83 @@ namespace B15_Ex02_1
         private const string k_InvalidNumOfPlayers = "Invalid number of players, please try again.";
         private const string k_EnterSizeOfBoard = "Please enter the desired size of board: '8' or '6'"; // should change it to  something better later.
         private const string k_InvalidSizeOfBoard = "Invalid board size, please try again.";
+        private const string k_EnterMove = "Whats your move? (Enter cell location)";
+        private const string k_InvalidMove = "Invalid move, see example (A,2)";
 
-        private static string firstPlayerName;
-        private static string secondPlayerName;
-        private static short numOfPlayers;
-        private static short sizeOfBoard;
-
-        public static void GetUserInput()
+        // Delete? 
+        public void GetUserInput()
         {
             Console.WriteLine(k_WelcomeMessege);
             Console.WriteLine(k_EnterFirstPlayerName);
+        }
+
+        public Position getUserMove()
+        {
+            Console.WriteLine(k_EnterMove);
 
             while (true)
             {
+                short column;
 
-                // Getting the first player name
-                firstPlayerName = Console.ReadLine();
-
-                if (ValidateInput.isValidName(firstPlayerName, out firstPlayerName))
+                string userMove = Console.ReadLine();
+                
+                if (InputValidator.isValidMoveInput(userMove))
                 {
-                    break;
-                }
+                    short row = short.Parse(userMove.Substring(3));
+                    string col = userMove.Substring(1);
 
-                // Invalid input
-                Console.WriteLine(k_InvalidName);
-            }
-
-            Console.WriteLine(k_HowManyPlayers);
-
-            while (true) 
-            {             
-                string numOfPlayersStr = Console.ReadLine();
-
-                if (ValidateInput.isValidNumOfPlayers(numOfPlayersStr, out numOfPlayers))
-                {
-                    break;
-                }
-
-                // Invalid input
-                Console.WriteLine(k_InvalidNumOfPlayers);
-            }
-
-            if (numOfPlayers == 2)
-            {
-                Console.WriteLine(k_EnterSecondPlayerName);
-
-                while (true)
-                {
-                    secondPlayerName = Console.ReadLine();
-
-                    if (ValidateInput.isValidName(secondPlayerName, out secondPlayerName))
+                    // replace the letter of the column to the number of the column. // Maybe there's a better way ? 
+                    switch (col.ToUpper()) 
                     {
-                        break;
+                        case "A":
+                            column = 0;
+                            break;
+                        case "B":
+                            column = 1;
+                            break;
+                        case "C":
+                            column = 2;
+                            break;
+                        case "D":
+                            column = 3;
+                            break;
+                        case "E":
+                            column = 4;
+                            break;
+                        case "F":
+                            column = 5;
+                            break;
+                        case "G":
+                            column = 6;
+                            break;
+                        case "H":
+                            column = 7;
+                            break;
+                        default:
+                            Console.WriteLine(k_InvalidMove);
+                            continue;
                     }
 
-                    // Invalid input
-                    Console.WriteLine(k_InvalidName);
+                     return new Position(row, column);
                 }
-            }
 
+                Console.WriteLine(k_InvalidMove);
+            }
+        }
+
+        public short getSizeOfBoard()
+        {
             Console.WriteLine(k_EnterSizeOfBoard);
+
+            short sizeOfBoard = 0;
 
             while (true)
             {
                 string sizeOfBoardStr = Console.ReadLine();
 
-                if (ValidateInput.isValidBoardSize(sizeOfBoardStr, out sizeOfBoard))
+                if (InputValidator.isValidBoardSize(sizeOfBoardStr, out sizeOfBoard))
                 {
-                    break;
+                    return sizeOfBoard;
                 }
 
                 // Invalid input
@@ -89,19 +98,60 @@ namespace B15_Ex02_1
             }
         }
 
-        public static short GetNumberOfPlayer
+        public string getSecondPlayerName()
         {
-            get
+            Console.WriteLine(k_EnterSecondPlayerName);
+
+            while (true)
             {
-                return numOfPlayers;
+                string secondPlayerName = Console.ReadLine();
+
+                if (InputValidator.isValidName(secondPlayerName, out secondPlayerName))
+                {
+                    return secondPlayerName;
+                }
+
+                // Invalid input
+                Console.WriteLine(k_InvalidName);
             }
         }
 
-        public static short getSizeOfBoard
+        public short getNumberOfPlayers()
         {
-            get
+            short numOfPlayers = 0;
+            Console.WriteLine(k_HowManyPlayers);
+
+            while (true)
             {
-                return sizeOfBoard;
+                string numOfPlayersStr = Console.ReadLine();
+
+                if (InputValidator.isValidNumOfPlayers(numOfPlayersStr, out numOfPlayers))
+                {
+                    return numOfPlayers;
+                }
+
+                // Invalid input
+                Console.WriteLine(k_InvalidNumOfPlayers);
+            }
+        }
+
+        public string GetFirstPlayerName()
+        {
+            Console.WriteLine(k_EnterFirstPlayerName);
+
+            while (true)
+            {
+
+                // Getting the first player name from the user
+                string firstPlayerName = Console.ReadLine();
+
+                if (InputValidator.isValidName(firstPlayerName, out firstPlayerName))
+                {
+                    return firstPlayerName;
+                }
+
+                // Invalid input
+                Console.WriteLine(k_InvalidName);
             }
         }
     }

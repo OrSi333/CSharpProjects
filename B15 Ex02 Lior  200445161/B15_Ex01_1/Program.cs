@@ -8,12 +8,8 @@ namespace B15_Ex02_1
     {
         static void Main()
         {
-            UserInterface.GetUserInput();
-
-            Board board = new Board(UserInterface.getSizeOfBoard);
-
-            Console.WriteLine(BoardFormat.GetBoardStringRepresentation(board));
-            Console.ReadLine();
+            GameEngine game = new GameEngine();
+            game.RunGame();
         }
     }
 }

@@ -51,19 +51,41 @@ namespace B15_Ex02_1
             return isValid;
         }
 
-        internal static Position getValidConquerDestination(Position i_Position, Direction direction, Player i_player)
+        internal static Position getValidConquerDestination(Position i_Position, Direction direction, Player i_player, Board i_Board)
         {
-     /*       Position checkPosition;
+            Position checkPosition = new Position(i_Position.Row, i_Position.Col);
 
             do
             {
-                checkPosition = new Position(i_Position.Row + direction.RowDiff, i_Position.Col + direction.ColDiff);
+                checkPosition = new Position(checkPosition.Row + direction.RowDiff, checkPosition.Col + direction.ColDiff);
 
-                i_Board.getCellAtPos(checkPosition).Coin.Color = i_player.Color;
+                if (i_Board.getCellAtPos(checkPosition).Coin.Color == i_player.Color)
+                {
+                    break;
+                }
 
-            } while (!checkPosition.Equals(destination));
-            */
-            return null;
+            } while (i_Board.getCellAtPos(checkPosition).Coin.Color !=  i_player.Color);
+          
+            return checkPosition;
+        }
+
+        internal static bool gameOver(Board i_Board)
+        {
+            bool gameOver = false;
+
+            // Going over the entire board and checks if all cells are filled, if not the game is not over.
+            for (int row = 0; row < i_Board.getSizeOfBoard; row++)
+            {
+                for (int col = 0; col < i_Board.getSizeOfBoard; col++)
+                {
+                    if (i_Board.getCellAtPos(new Position(row, col)) != null)
+                    {
+                        gameOver = true;
+                    }
+                }
+            }
+
+            return gameOver;
         }
     }
 }
