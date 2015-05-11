@@ -36,8 +36,8 @@ namespace B15_Ex02_1
                 
                 if (InputValidator.isValidMoveInput(userMove))
                 {
-                    short row = short.Parse(userMove.Substring(3));
-                    string col = userMove.Substring(1);
+                    short row = short.Parse(userMove.Substring(3, 1));
+                    string col = userMove.Substring(1, 1);
 
                     // replace the letter of the column to the number of the column. // Maybe there's a better way ? 
                     switch (col.ToUpper()) 
@@ -71,7 +71,7 @@ namespace B15_Ex02_1
                             continue;
                     }
 
-                     return new Position(row, column);
+                     return new Position(row - 1, column);
                 }
 
                 Console.WriteLine(k_InvalidMove);

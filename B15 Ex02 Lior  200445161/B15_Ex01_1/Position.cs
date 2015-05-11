@@ -27,5 +27,18 @@ namespace B15_Ex02_1
             set { m_Col = value; }
         }
 
+        public bool equalPos(Position i_Position)
+        {
+            bool isEqual = false;
+
+            // Checks if the two positions share the same row and col
+            if (this.Col == i_Position.Col && this.Row == i_Position.Row) 
+            {
+                isEqual = true;
+            }
+
+            return isEqual;
+        }
+
     }
 }

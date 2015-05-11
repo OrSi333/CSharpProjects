@@ -10,7 +10,7 @@ namespace B15_Ex02_1
         {
             bool isValid;
 
-            if (i_Board.getCellAtPos(i_Position) != null) 
+            if (i_Board.getCellAtPos(i_Position).Coin != null) 
             {
                 isValid = false;
             }
@@ -31,19 +31,20 @@ namespace B15_Ex02_1
             Position adjacentCellLeft = new Position(i_Position.Row + Direction.LEFT.RowDiff, i_Position.Col + Direction.LEFT.ColDiff);
             Position adjacentCellRight = new Position(i_Position.Row + Direction.RIGHT.RowDiff, i_Position.Col + Direction.RIGHT.ColDiff);
 
-            if (i_Board.getCellAtPos(adjacentCellDown) != null && i_Board.getCellAtPos(adjacentCellDown).Coin.Color != i_Player.Color)
+            // Checks if the adjacent cells are controled by the enemy
+            if (i_Board.getCellAtPos(adjacentCellDown).Coin != null && i_Board.getCellAtPos(adjacentCellDown).Coin.Color != i_Player.Color)
             {
                 isValid = true;
             }
-            else if (i_Board.getCellAtPos(adjacentCellUp) != null && i_Board.getCellAtPos(adjacentCellUp).Coin.Color != i_Player.Color)
+            else if (i_Board.getCellAtPos(adjacentCellUp).Coin != null && i_Board.getCellAtPos(adjacentCellUp).Coin.Color != i_Player.Color)
             {
                 isValid = true;
             }
-            else if (i_Board.getCellAtPos(adjacentCellLeft) != null && i_Board.getCellAtPos(adjacentCellLeft).Coin.Color != i_Player.Color)
+            else if (i_Board.getCellAtPos(adjacentCellLeft).Coin != null && i_Board.getCellAtPos(adjacentCellLeft).Coin.Color != i_Player.Color)
             {
                 isValid = true;
             }
-            else if (i_Board.getCellAtPos(adjacentCellRight) != null && i_Board.getCellAtPos(adjacentCellRight).Coin.Color != i_Player.Color)
+            else if (i_Board.getCellAtPos(adjacentCellRight).Coin != null && i_Board.getCellAtPos(adjacentCellRight).Coin.Color != i_Player.Color)
             {
                 isValid = true;
             }
@@ -59,28 +60,35 @@ namespace B15_Ex02_1
             {
                 checkPosition = new Position(checkPosition.Row + direction.RowDiff, checkPosition.Col + direction.ColDiff);
 
+                // If the cell is empty
+                if (i_Board.getCellAtPos(checkPosition).Coin == null)
+                {
+                    checkPosition = null;
+                    break;
+                }
+
                 if (i_Board.getCellAtPos(checkPosition).Coin.Color == i_player.Color)
                 {
                     break;
                 }
 
-            } while (i_Board.getCellAtPos(checkPosition).Coin.Color !=  i_player.Color);
+            } while (i_Board.getCellAtPos(checkPosition).Coin.Color != i_player.Color);
           
             return checkPosition;
         }
 
         internal static bool gameOver(Board i_Board)
         {
-            bool gameOver = false;
+            bool gameOver = true;
 
             // Going over the entire board and checks if all cells are filled, if not the game is not over.
             for (int row = 0; row < i_Board.getSizeOfBoard; row++)
             {
                 for (int col = 0; col < i_Board.getSizeOfBoard; col++)
                 {
-                    if (i_Board.getCellAtPos(new Position(row, col)) != null)
+                    if (i_Board.getCellAtPos(new Position(row, col)).Coin == null)
                     {
-                        gameOver = true;
+                        gameOver = false;
                     }
                 }
             }
