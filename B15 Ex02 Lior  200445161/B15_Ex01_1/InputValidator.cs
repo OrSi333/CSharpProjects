@@ -52,8 +52,9 @@ namespace B15_Ex02_1
 
         public static bool isValidMoveInput(string i_Move)
         {
-            bool isValidMove = Regex.IsMatch(i_Move, @"([A-Z],[0-9])", RegexOptions.IgnoreCase);
+            bool isValidMove = Regex.IsMatch(i_Move, "^\\([A-Z],[1-9]\\)$", RegexOptions.IgnoreCase);
 
+            
             return isValidMove;
         }
     }

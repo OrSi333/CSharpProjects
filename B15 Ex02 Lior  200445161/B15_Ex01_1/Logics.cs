@@ -10,7 +10,11 @@ namespace B15_Ex02_1
         {
             bool isValid;
 
-            if (i_Board.getCellAtPos(i_Position).Coin != null) 
+            if (CheckForBoarder(i_Position, i_Board))
+            {
+                isValid = false;
+            }
+            else if (i_Board.getCellAtPos(i_Position).Coin != null)
             {
                 isValid = false;
             }
@@ -26,40 +30,76 @@ namespace B15_Ex02_1
         {
             bool isValid = false;
 
+
+
             Position adjacentCellUp = new Position(i_Position.Row + Direction.UP.RowDiff, i_Position.Col + Direction.UP.ColDiff);
             Position adjacentCellDown = new Position(i_Position.Row + Direction.DOWN.RowDiff, i_Position.Col + Direction.DOWN.ColDiff);
             Position adjacentCellLeft = new Position(i_Position.Row + Direction.LEFT.RowDiff, i_Position.Col + Direction.LEFT.ColDiff);
             Position adjacentCellRight = new Position(i_Position.Row + Direction.RIGHT.RowDiff, i_Position.Col + Direction.RIGHT.ColDiff);
 
+            if (CheckForBoarder(i_Position, i_Board))
+            {
+
+            }
             // Checks if the adjacent cells are controled by the enemy
-            if (i_Board.getCellAtPos(adjacentCellDown).Coin != null && i_Board.getCellAtPos(adjacentCellDown).Coin.Color != i_Player.Color)
+            if (!CheckForBoarder(adjacentCellDown, i_Board))
             {
-                isValid = true;
-            }
-            else if (i_Board.getCellAtPos(adjacentCellUp).Coin != null && i_Board.getCellAtPos(adjacentCellUp).Coin.Color != i_Player.Color)
-            {
-                isValid = true;
-            }
-            else if (i_Board.getCellAtPos(adjacentCellLeft).Coin != null && i_Board.getCellAtPos(adjacentCellLeft).Coin.Color != i_Player.Color)
-            {
-                isValid = true;
-            }
-            else if (i_Board.getCellAtPos(adjacentCellRight).Coin != null && i_Board.getCellAtPos(adjacentCellRight).Coin.Color != i_Player.Color)
-            {
-                isValid = true;
+                if (i_Board.getCellAtPos(adjacentCellDown).Coin != null && i_Board.getCellAtPos(adjacentCellDown).Coin.Color != i_Player.Color)
+                {
+                    isValid = true;
+                }
             }
 
+            if (!CheckForBoarder(adjacentCellUp, i_Board))
+            {
+                if (i_Board.getCellAtPos(adjacentCellUp).Coin != null && i_Board.getCellAtPos(adjacentCellUp).Coin.Color != i_Player.Color)
+                {
+                    isValid = true;
+                }
+            }
+
+            if (!CheckForBoarder(adjacentCellLeft, i_Board))
+            {
+                if (i_Board.getCellAtPos(adjacentCellLeft).Coin != null && i_Board.getCellAtPos(adjacentCellLeft).Coin.Color != i_Player.Color)
+                {
+                    isValid = true;
+                }
+            }
+
+            if (!CheckForBoarder(adjacentCellRight, i_Board))
+            {
+                if (i_Board.getCellAtPos(adjacentCellRight).Coin != null && i_Board.getCellAtPos(adjacentCellRight).Coin.Color != i_Player.Color)
+                {
+                    isValid = true;
+                }
+            }
             return isValid;
+        }
+
+        private static bool CheckForBoarder(Position i_Position, Board i_Board)
+        {
+            bool isBoarder = false;
+
+            // Checks if the given position is a boarder
+            if (i_Position.Row < 0 || i_Position.Row >= i_Board.getSizeOfBoard || i_Position.Col < 0 || i_Position.Col >= i_Board.getSizeOfBoard)
+            {
+                isBoarder = true;    
+            }
+
+            return isBoarder;
         }
 
         internal static Position getValidConquerDestination(Position i_Position, Direction direction, Player i_player, Board i_Board)
         {
             Position checkPosition = new Position(i_Position.Row, i_Position.Col);
 
+            //for each cordinate (checkPosition.Row + direction.RowDiff) < 0 || > 
+
             do
             {
                 checkPosition = new Position(checkPosition.Row + direction.RowDiff, checkPosition.Col + direction.ColDiff);
-
+                if (CheckForBoarder(checkPosition, i_Board))
+                    return null;
                 // If the cell is empty
                 if (i_Board.getCellAtPos(checkPosition).Coin == null)
                 {

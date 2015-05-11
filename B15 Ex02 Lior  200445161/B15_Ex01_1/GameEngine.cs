@@ -49,8 +49,6 @@ namespace B15_Ex02_1
            Console.WriteLine(BoardFormat.GetBoardStringRepresentation(m_Board));
        }
 
-
-
        public bool performMove(Player player, Position i_Position)
         {
             bool movePerformed = false;
