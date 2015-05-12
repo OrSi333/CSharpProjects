@@ -10,6 +10,10 @@ namespace B15_Ex02_1
         public static readonly Direction DOWN = new Direction(1, 0);
         public static readonly Direction LEFT = new Direction(0, -1);
         public static readonly Direction RIGHT = new Direction(0, 1);
+        public static readonly Direction UPRIGHT = new Direction(-1, 1);
+        public static readonly Direction UPLEFT = new Direction(-1, -1);
+        public static readonly Direction DOWNRIGHT = new Direction(1, 1);
+        public static readonly Direction DOWNLEFT = new Direction(1, -1);
 
         private int rowDiff;
         private int colDiff;
@@ -24,7 +28,7 @@ namespace B15_Ex02_1
         {
             get
             {
-                return rowDiff;
+                return this.rowDiff;
             }
         }
 
@@ -32,7 +36,7 @@ namespace B15_Ex02_1
         {
             get
             {
-                return colDiff;
+                return this.colDiff;
             }
         }
     }

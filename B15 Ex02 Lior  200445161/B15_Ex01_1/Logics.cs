@@ -10,7 +10,7 @@ namespace B15_Ex02_1
         {
             bool isValid;
 
-            if (CheckForBoarder(i_Position, i_Board))
+            if (isValidPosition(i_Position, i_Board))
             {
                 isValid = false;
             }
@@ -29,20 +29,49 @@ namespace B15_Ex02_1
         private static bool checkIfAdjacentCellIsEnemy(Board i_Board, Player i_Player, Position i_Position)
         {
             bool isValid = false;
-
-
-
             Position adjacentCellUp = new Position(i_Position.Row + Direction.UP.RowDiff, i_Position.Col + Direction.UP.ColDiff);
             Position adjacentCellDown = new Position(i_Position.Row + Direction.DOWN.RowDiff, i_Position.Col + Direction.DOWN.ColDiff);
             Position adjacentCellLeft = new Position(i_Position.Row + Direction.LEFT.RowDiff, i_Position.Col + Direction.LEFT.ColDiff);
             Position adjacentCellRight = new Position(i_Position.Row + Direction.RIGHT.RowDiff, i_Position.Col + Direction.RIGHT.ColDiff);
+            Position adjacentCellUpRight = new Position(i_Position.Row + Direction.UPRIGHT.RowDiff, i_Position.Col + Direction.UPRIGHT.ColDiff);
+            Position adjacentCellUpLeft = new Position(i_Position.Row + Direction.UPLEFT.RowDiff, i_Position.Col + Direction.UPLEFT.ColDiff);
+            Position adjacentCellDownRight = new Position(i_Position.Row + Direction.DOWNRIGHT.RowDiff, i_Position.Col + Direction.DOWNRIGHT.ColDiff);
+            Position adjacentCellDownLeft = new Position(i_Position.Row + Direction.DOWNLEFT.RowDiff, i_Position.Col + Direction.DOWNLEFT.ColDiff);
 
-            if (CheckForBoarder(i_Position, i_Board))
-            {
-
-            }
             // Checks if the adjacent cells are controled by the enemy
-            if (!CheckForBoarder(adjacentCellDown, i_Board))
+            if (!isValidPosition(adjacentCellUpRight, i_Board))
+            {
+                if (i_Board.getCellAtPos(adjacentCellUpRight).Coin != null && i_Board.getCellAtPos(adjacentCellUpRight).Coin.Color != i_Player.Color)
+                {
+                    isValid = true;
+                }
+            }
+
+            if (!isValidPosition(adjacentCellUpLeft, i_Board))
+            {
+                if (i_Board.getCellAtPos(adjacentCellUpLeft).Coin != null && i_Board.getCellAtPos(adjacentCellUpLeft).Coin.Color != i_Player.Color)
+                {
+                    isValid = true;
+                }
+            }
+
+            if (!isValidPosition(adjacentCellDownRight, i_Board))
+            {
+                if (i_Board.getCellAtPos(adjacentCellDownRight).Coin != null && i_Board.getCellAtPos(adjacentCellDownRight).Coin.Color != i_Player.Color)
+                {
+                    isValid = true;
+                }
+            }
+
+            if (!isValidPosition(adjacentCellDownLeft, i_Board))
+            {
+                if (i_Board.getCellAtPos(adjacentCellDownLeft).Coin != null && i_Board.getCellAtPos(adjacentCellDownLeft).Coin.Color != i_Player.Color)
+                {
+                    isValid = true;
+                }
+            }
+
+            if (!isValidPosition(adjacentCellDown, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellDown).Coin != null && i_Board.getCellAtPos(adjacentCellDown).Coin.Color != i_Player.Color)
                 {
@@ -50,7 +79,7 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!CheckForBoarder(adjacentCellUp, i_Board))
+            if (!isValidPosition(adjacentCellUp, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellUp).Coin != null && i_Board.getCellAtPos(adjacentCellUp).Coin.Color != i_Player.Color)
                 {
@@ -58,7 +87,7 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!CheckForBoarder(adjacentCellLeft, i_Board))
+            if (!isValidPosition(adjacentCellLeft, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellLeft).Coin != null && i_Board.getCellAtPos(adjacentCellLeft).Coin.Color != i_Player.Color)
                 {
@@ -66,22 +95,24 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!CheckForBoarder(adjacentCellRight, i_Board))
+            if (!isValidPosition(adjacentCellRight, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellRight).Coin != null && i_Board.getCellAtPos(adjacentCellRight).Coin.Color != i_Player.Color)
                 {
                     isValid = true;
                 }
             }
+
             return isValid;
         }
 
-        private static bool CheckForBoarder(Position i_Position, Board i_Board)
+        private static bool isValidPosition(Position i_Position, Board i_Board)
         {
             bool isBoarder = false;
+            short sizeOfBoard = i_Board.getSizeOfBoard;
 
-            // Checks if the given position is a boarder
-            if (i_Position.Row < 0 || i_Position.Row >= i_Board.getSizeOfBoard || i_Position.Col < 0 || i_Position.Col >= i_Board.getSizeOfBoard)
+            // Checks if the given position is within the board dimentions
+            if (i_Position.Row < 0 || i_Position.Row >= sizeOfBoard || i_Position.Col < 0 || i_Position.Col >= sizeOfBoard)
             {
                 isBoarder = true;    
             }
@@ -93,13 +124,15 @@ namespace B15_Ex02_1
         {
             Position checkPosition = new Position(i_Position.Row, i_Position.Col);
 
-            //for each cordinate (checkPosition.Row + direction.RowDiff) < 0 || > 
-
             do
             {
                 checkPosition = new Position(checkPosition.Row + direction.RowDiff, checkPosition.Col + direction.ColDiff);
-                if (CheckForBoarder(checkPosition, i_Board))
+             
+                if (isValidPosition(checkPosition, i_Board))
+                {
                     return null;
+                }
+                    
                 // If the cell is empty
                 if (i_Board.getCellAtPos(checkPosition).Coin == null)
                 {
@@ -111,8 +144,8 @@ namespace B15_Ex02_1
                 {
                     break;
                 }
-
-            } while (i_Board.getCellAtPos(checkPosition).Coin.Color != i_player.Color);
+            } 
+            while (i_Board.getCellAtPos(checkPosition).Coin.Color != i_player.Color);
           
             return checkPosition;
         }
@@ -137,4 +170,3 @@ namespace B15_Ex02_1
         }
     }
 }
-

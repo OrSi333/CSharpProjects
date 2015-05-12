@@ -8,11 +8,10 @@ namespace B15_Ex02_1
     {
         BLACK,
         WHITE
-    };
+    }
 
     public class Coin
     {
-
         private eCoinColor m_Color;
 
         public Coin(eCoinColor i_Color)
@@ -24,11 +23,12 @@ namespace B15_Ex02_1
         {
             get
             {
-                return m_Color;
+                return this.m_Color;
             }
+
             set
             {
-                m_Color = value;
+                this.m_Color = value;
             }
         }
     }

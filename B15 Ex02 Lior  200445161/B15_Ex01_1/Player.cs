@@ -19,20 +19,20 @@ namespace B15_Ex02_1
 
         public string Name
         {
-            get { return m_Name; }
-            set { m_Name = value; }
+            get { return this.m_Name; }
+            set { this.m_Name = value; }
         }
 
         public short Score
         {
-            get { return m_Score; }
-            set { m_Score = value; }
+            get { return this.m_Score; }
+            set { this.m_Score = value; }
         }
         
         public eCoinColor Color
         {
-            get { return m_Color; }
-            set { m_Color = value; }
+            get { return this.m_Color; }
+            set { this.m_Color = value; }
         }
     }
 }

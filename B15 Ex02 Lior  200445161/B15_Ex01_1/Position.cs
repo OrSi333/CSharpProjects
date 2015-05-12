@@ -17,14 +17,14 @@ namespace B15_Ex02_1
 
         public int Row
         {
-            get { return m_Row; }
-            set { m_Row = value; }
+            get { return this.m_Row; }
+            set { this.m_Row = value; }
         }
 
         public int Col
         {
-            get { return m_Col; }
-            set { m_Col = value; }
+            get { return this.m_Col; }
+            set { this.m_Col = value; }
         }
 
         public bool equalPos(Position i_Position)

@@ -54,7 +54,6 @@ namespace B15_Ex02_1
         {
             bool isValidMove = Regex.IsMatch(i_Move, "^\\([A-Z],[1-9]\\)$", RegexOptions.IgnoreCase);
 
-            
             return isValidMove;
         }
     }
