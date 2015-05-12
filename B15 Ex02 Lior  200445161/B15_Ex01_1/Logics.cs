@@ -10,7 +10,7 @@ namespace B15_Ex02_1
         {
             bool isValid;
 
-            if (isValidPosition(i_Position, i_Board))
+            if (isPositionInsideBoard(i_Position, i_Board))
             {
                 isValid = false;
             }
@@ -39,7 +39,7 @@ namespace B15_Ex02_1
             Position adjacentCellDownLeft = new Position(i_Position.Row + Direction.DOWNLEFT.RowDiff, i_Position.Col + Direction.DOWNLEFT.ColDiff);
 
             // Checks if the adjacent cells are controled by the enemy
-            if (!isValidPosition(adjacentCellUpRight, i_Board))
+            if (!isPositionInsideBoard(adjacentCellUpRight, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellUpRight).Coin != null && i_Board.getCellAtPos(adjacentCellUpRight).Coin.Color != i_Player.Color)
                 {
@@ -47,7 +47,7 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!isValidPosition(adjacentCellUpLeft, i_Board))
+            if (!isPositionInsideBoard(adjacentCellUpLeft, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellUpLeft).Coin != null && i_Board.getCellAtPos(adjacentCellUpLeft).Coin.Color != i_Player.Color)
                 {
@@ -55,7 +55,7 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!isValidPosition(adjacentCellDownRight, i_Board))
+            if (!isPositionInsideBoard(adjacentCellDownRight, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellDownRight).Coin != null && i_Board.getCellAtPos(adjacentCellDownRight).Coin.Color != i_Player.Color)
                 {
@@ -63,7 +63,7 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!isValidPosition(adjacentCellDownLeft, i_Board))
+            if (!isPositionInsideBoard(adjacentCellDownLeft, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellDownLeft).Coin != null && i_Board.getCellAtPos(adjacentCellDownLeft).Coin.Color != i_Player.Color)
                 {
@@ -71,7 +71,7 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!isValidPosition(adjacentCellDown, i_Board))
+            if (!isPositionInsideBoard(adjacentCellDown, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellDown).Coin != null && i_Board.getCellAtPos(adjacentCellDown).Coin.Color != i_Player.Color)
                 {
@@ -79,7 +79,7 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!isValidPosition(adjacentCellUp, i_Board))
+            if (!isPositionInsideBoard(adjacentCellUp, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellUp).Coin != null && i_Board.getCellAtPos(adjacentCellUp).Coin.Color != i_Player.Color)
                 {
@@ -87,7 +87,7 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!isValidPosition(adjacentCellLeft, i_Board))
+            if (!isPositionInsideBoard(adjacentCellLeft, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellLeft).Coin != null && i_Board.getCellAtPos(adjacentCellLeft).Coin.Color != i_Player.Color)
                 {
@@ -95,7 +95,7 @@ namespace B15_Ex02_1
                 }
             }
 
-            if (!isValidPosition(adjacentCellRight, i_Board))
+            if (!isPositionInsideBoard(adjacentCellRight, i_Board))
             {
                 if (i_Board.getCellAtPos(adjacentCellRight).Coin != null && i_Board.getCellAtPos(adjacentCellRight).Coin.Color != i_Player.Color)
                 {
@@ -106,7 +106,7 @@ namespace B15_Ex02_1
             return isValid;
         }
 
-        private static bool isValidPosition(Position i_Position, Board i_Board)
+        internal static bool isPositionInsideBoard(Position i_Position, Board i_Board)
         {
             bool isBoarder = false;
             short sizeOfBoard = i_Board.getSizeOfBoard;
@@ -128,7 +128,7 @@ namespace B15_Ex02_1
             {
                 checkPosition = new Position(checkPosition.Row + direction.RowDiff, checkPosition.Col + direction.ColDiff);
              
-                if (isValidPosition(checkPosition, i_Board))
+                if (isPositionInsideBoard(checkPosition, i_Board))
                 {
                     return null;
                 }
@@ -167,6 +167,58 @@ namespace B15_Ex02_1
             }
 
             return gameOver;
+        }
+
+        // Returns a list of possible moves that the current player can make.
+        internal static List<Position> allPossibleMoves(Board i_Board, Player i_Player)
+        {
+            List<Position> possibleMoves = new List<Position>();
+
+            foreach (Position pos in i_Board.getEmptyCells())
+            {
+                
+                // Checks if the position is valid
+                if (Logics.isValidCoinPositioning(i_Board, i_Player, pos))
+                {
+                    possibleMoves.Add(pos);
+                }
+            }
+
+            return possibleMoves;
+        }
+
+        internal static Player winnerOfTheGame(Board i_Board, Player playerOne, Player playerTwo)
+        {
+            Player playerToRetrun = playerOne;
+
+            for (int i = 0; i < i_Board.getSizeOfBoard; i++)
+            {
+                for (int j = 0; j < i_Board.getSizeOfBoard; j++)
+                {
+                    if (i_Board.getCellAtPos(new Position(i, j)).Coin.Color == eCoinColor.WHITE)
+                    {
+                        playerOne.Score++;
+                    }
+                    else
+                    {
+                        playerTwo.Score++;
+                    }
+                }
+            }
+
+            // Checks who has the highest score
+            if (playerOne.Score < playerTwo.Score)
+            {
+                playerToRetrun = playerTwo;
+            }
+
+            // Tie, is it possible in this game ? 
+            if (playerOne.Score == playerTwo.Score)
+            {
+                playerToRetrun = null;
+            }
+
+            return playerToRetrun;
         }
     }
 }
