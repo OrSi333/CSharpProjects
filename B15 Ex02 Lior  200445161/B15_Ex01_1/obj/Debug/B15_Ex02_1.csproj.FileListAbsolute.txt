@@ -16,3 +16,4 @@ C:\Users\Lior\Dropbox\c# ex02\CSharpProjects\B15 Ex02 Lior  200445161\B15_Ex01_1
 C:\Users\Lior\Dropbox\c# ex02\CSharpProjects\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\B15_Ex01_1.pdb
 C:\Users\Lior\Dropbox\c# ex02\CSharpProjects\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\Ex02.ConsoleUtils.dll
 C:\Users\Lior\Dropbox\c# ex02\CSharpProjects\B15 Ex02 Lior  200445161\B15_Ex01_1\obj\Debug\B15_Ex02_1.csprojResolveAssemblyReference.cache
+C:\Users\7\C#\B15 Ex02 Lior  200445161\B15_Ex01_1\obj\Debug\B15_Ex02_1.csprojResolveAssemblyReference.cache
