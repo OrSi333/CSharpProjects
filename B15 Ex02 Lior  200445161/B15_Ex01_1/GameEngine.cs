@@ -25,22 +25,46 @@ namespace B15_Ex02_1
 
            clearAndPrintBoard();
 
-           while (!Logics.gameOver(m_Board))
+           while (true)
            {
-               clearAndPrintBoard();
-
-               while (!performMove(playerOne, userInterface.getUserMove(playerOne)))
+               while (!Logics.gameOver(m_Board))
                {
                    clearAndPrintBoard();
-                   Console.WriteLine("Invalid Move");
+
+                   if (Logics.allPossibleMoves(m_Board, playerOne) != null)
+                   {
+                       while (!performMove(playerOne, userInterface.getUserMove(playerOne)))
+                       {
+                           clearAndPrintBoard();
+                           userInterface.printErrorMsg();
+                       }
+                   }
+                   else
+                   {
+                       userInterface.printNoPossibleMsg();
+                   }
+
+                   clearAndPrintBoard();
+
+                   if (Logics.allPossibleMoves(m_Board, playerTwo) != null)
+                   {
+                       while (!performMove(playerTwo, userInterface.getUserMove(playerTwo)))
+                       {
+                           clearAndPrintBoard();
+                           userInterface.printErrorMsg();
+                       }
+                   }
+                   else
+                   {
+                       clearAndPrintBoard();
+                       userInterface.printErrorMsg();
+                   }
                }
 
-               clearAndPrintBoard();
-
-               while (!performMove(playerTwo, userInterface.getUserMove(playerTwo)))
+               Player winner = Logics.winnerOfTheGame(m_Board, playerOne, playerTwo);
+               if (userInterface.gameOverAndPlayAnotherGame(winner.Name) == false) // SHOULD BE CHAGNED!
                {
-                   clearAndPrintBoard();
-                   Console.WriteLine("Invalid Move");
+                   break;
                }
            }
        }
@@ -138,28 +162,6 @@ namespace B15_Ex02_1
                 m_Board.getCellAtPos(conquerPosition).Coin.Color = i_player.Color;
             } 
             while (!conquerPosition.equalPos(destination));
-        }
-
-       // Returns a list of positions that are empty. 
-       public List<Position> emptyCells(Board i_Board)
-        {
-           List<Position> emptyPositions = new List<Position>();
-
-           for (int i = 0; i < i_Board.getSizeOfBoard; i++) 
-           {
-               for (int j = 0; j <i_Board.getSizeOfBoard; j++) 
-               {
-                   Position checkPosition = new Position(i, j);
-
-                   // Checks if the cell is empty
-                   if (i_Board.getCellAtPos(checkPosition).Coin == null) 
-                   {
-                       emptyPositions.Add(checkPosition);
-                   }
-               }
-           }
-
-           return emptyPositions;
         }
     }
 }

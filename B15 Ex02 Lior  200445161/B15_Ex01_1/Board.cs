@@ -35,6 +35,28 @@ namespace B15_Ex02_1
             this.getCellAtPos(new Position(this.m_SizeOfBoard / 2, (this.m_SizeOfBoard / 2) - 1)).Coin = new Coin(eCoinColor.BLACK);
         }
 
+        // Returns a list of positions that are empty. 
+        public List<Position> getEmptyCells()
+        {
+            List<Position> emptyPositions = new List<Position>();
+
+            for (int i = 0; i < getSizeOfBoard; i++)
+            {
+                for (int j = 0; j < getSizeOfBoard; j++)
+                {
+                    Position checkPosition = new Position(i, j);
+
+                    // Checks if the cell is empty
+                    if (getCellAtPos(checkPosition).Coin == null)
+                    {
+                        emptyPositions.Add(checkPosition);
+                    }
+                }
+            }
+
+            return emptyPositions;
+        }
+
         public Cell getCellAtPos(Position i_Position)
         {
             return this.m_Board[i_Position.Row, i_Position.Col]; 

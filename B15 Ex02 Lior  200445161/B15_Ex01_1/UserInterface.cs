@@ -16,6 +16,9 @@ namespace B15_Ex02_1
         private const string k_InvalidSizeOfBoard = "Invalid board size, please try again.";
         private const string k_EnterMove = "whats your move? (Enter cell location)";
         private const string k_InvalidMove = "Invalid move, see example (A,2)";
+        private const string k_NoPossibleMoves = "You don't have any possible moves, press 'Enter' to continue";
+        private const string k_GameOver = "Game Over! the winner is {0}";
+        private const string k_playAgain = "Would you like to play again ? press '1' to play again or any other key to quit";
 
         // Delete? 
         public void WelcomeMessage()
@@ -152,6 +155,34 @@ namespace B15_Ex02_1
                 // Invalid input
                 Console.WriteLine(k_InvalidName);
             }
+        }
+
+        internal void printErrorMsg()
+        {
+            Console.WriteLine(k_InvalidMove);
+            Console.ReadLine();
+        }
+
+        internal void printNoPossibleMsg()
+        {
+            Console.WriteLine(k_NoPossibleMoves);
+            Console.ReadLine();
+        }
+
+        internal bool gameOverAndPlayAnotherGame(string i_PlayerName)
+        {
+            bool anotherGame = false;
+
+            Console.WriteLine(string.Format(k_GameOver, i_PlayerName));
+            Console.WriteLine(k_playAgain);
+            string playAgainInput = Console.ReadLine();
+
+            if (playAgainInput.Equals("1"))
+            {
+                anotherGame = true;
+            }
+
+            return anotherGame;
         }
     }
 }
