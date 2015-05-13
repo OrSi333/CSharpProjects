@@ -10,5 +10,3 @@ C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  20044516
 C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\B15_Ex01_1.pdb
 C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\bin\Debug\Ex02.ConsoleUtils.dll
 C:\Users\Leorz\Documents\MEGAsync\VisualStudio WorkSpace\B15 Ex02 Lior  200445161\B15_Ex01_1\obj\Debug\B15_Ex01_1.csprojResolveAssemblyReference.cache
-C:\Users\7\C#\Ex2\B15_Ex01_1\obj\Debug\B15_Ex01_1.exe
-C:\Users\7\C#\Ex2\B15_Ex01_1\obj\Debug\B15_Ex01_1.pdb
