@@ -20,6 +20,10 @@ namespace B15_Ex02_1
            {
                playerTwo = new Player(userInterface.getSecondPlayerName(), 0, eCoinColor.BLACK);
            }
+         //  else
+           //{
+             //  playerTwo = new Player()
+           //}
 
            m_Board = new Board(userInterface.getSizeOfBoard());
 

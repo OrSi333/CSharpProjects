@@ -40,7 +40,7 @@ namespace B15_Ex02_1
                 {
                     short row = short.Parse(userMove.Substring(3, 1));
                     string col = userMove.Substring(1, 1);
-
+                    
                     // replace the letter of the column to the number of the column. // Maybe there's a better way ? 
                     switch (col.ToUpper()) 
                     {
