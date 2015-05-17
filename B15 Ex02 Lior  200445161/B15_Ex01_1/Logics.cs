@@ -130,7 +130,8 @@ namespace B15_Ex02_1
              
                 if (isPositionInsideBoard(checkPosition, i_Board))
                 {
-                    return null;
+                    checkPosition = null;
+                    break;
                 }
                     
                 // If the cell is empty
