@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace B15_Ex01_1
+namespace B15_Ex02_1
 {
-    class Ai
+    class AI
     {
+        Board m_Board; 
+
     }
 }

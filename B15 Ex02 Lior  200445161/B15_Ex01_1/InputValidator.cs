@@ -7,16 +7,18 @@ namespace B15_Ex02_1
 {
     public static class InputValidator
     {
+        private const int k_MaxNameLength = 15;
+
         public static bool isValidName(string i_name, out string o_name)
         {
             bool validName = true;
-
+             
             // Trimming white space in the given string
             string nameWithoutMultiplySpaces = Regex.Replace(i_name, @"\s+", " ");
             o_name = nameWithoutMultiplySpaces;
 
             // Making sure the name contains less than or exactly 15 characters
-            if (o_name.Length > 15)
+            if (o_name.Length > k_MaxNameLength)
             {
                 validName = false;
             }

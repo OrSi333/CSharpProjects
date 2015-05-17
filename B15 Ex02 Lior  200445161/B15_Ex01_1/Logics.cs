@@ -123,6 +123,7 @@ namespace B15_Ex02_1
         internal static Position getValidConquerDestination(Position i_Position, Direction direction, Player i_player, Board i_Board)
         {
             Position checkPosition = new Position(i_Position.Row, i_Position.Col);
+            short numOfEatenEnemies = 0;
 
             do
             {
@@ -143,14 +144,22 @@ namespace B15_Ex02_1
 
                 if (i_Board.getCellAtPos(checkPosition).Coin.Color == i_player.Color)
                 {
+                    if (numOfEatenEnemies == 0)
+                    {
+                        checkPosition = null;
+                    }
+
                     break;
                 }
+
+                numOfEatenEnemies++;
             } 
             while (i_Board.getCellAtPos(checkPosition).Coin.Color != i_player.Color);
           
             return checkPosition;
         }
 
+        // TODO should change the condition to when there are no more moves for both players the game is over
         internal static bool gameOver(Board i_Board)
         {
             bool gameOver = true;
