@@ -14,16 +14,23 @@ namespace B15_Ex02_1
         private const string k_InvalidNumOfPlayers = "Invalid number of players, please try again.";
         private const string k_EnterSizeOfBoard = "Please enter the desired size of board: '8' or '6'"; // should change it to  something better later.
         private const string k_InvalidSizeOfBoard = "Invalid board size, please try again.";
-        private const string k_EnterMove = "whats your move? (Enter cell location)";
-        private const string k_InvalidMove = "Invalid move, see example (A,2)";
+        private const string k_EnterMove = "whats your move? (Enter cell location) for example (A,2)";
+        private const string k_InvalidMove = "Invalid move";
         private const string k_NoPossibleMoves = "You don't have any possible moves, press 'Enter' to continue";
         private const string k_GameOver = "Game Over! the winner is {0}";
         private const string k_playAgain = "Would you like to play again ? press '1' to play again or any other key to quit";
+        private const string k_DrawMsg = "Game has ended in a draw!! ";
+        private const string k_ScoreMsg = "{0}'s score is {1}";
 
         // Delete? 
         public void WelcomeMessage()
         {
             Console.WriteLine(k_WelcomeMessege);
+        }
+
+        public void printPlayerTurnPrompt(Player i_Player)
+        {
+            Console.WriteLine(string.Format("{0}, {1}", i_Player.Name, k_EnterMove));
         }
 
         public Position getUserMove(Player i_player)
@@ -32,48 +39,22 @@ namespace B15_Ex02_1
 
             while (true)
             {
-                short column;
-
                 string userMove = Console.ReadLine();
                 
                 if (InputValidator.isValidMoveInput(userMove))
                 {
                     short row = short.Parse(userMove.Substring(3, 1));
-                    string col = userMove.Substring(1, 1);
-                    
-                    // replace the letter of the column to the number of the column. // Maybe there's a better way ? 
-                    switch (col.ToUpper()) 
+                    char col = userMove.ToUpper()[1];
+                    int colNumber = col - 'A';
+                   
+                    // replace the letter of the column to the number of the column.
+                    if (colNumber < 0 || colNumber > 7 )
                     {
-                        case "A":
-                            column = 0;
-                            break;
-                        case "B":
-                            column = 1;
-                            break;
-                        case "C":
-                            column = 2;
-                            break;
-                        case "D":
-                            column = 3;
-                            break;
-                        case "E":
-                            column = 4;
-                            break;
-                        case "F":
-                            column = 5;
-                            break;
-                        case "G":
-                            column = 6;
-                            break;
-                        case "H":
-                            column = 7;
-                            break;
-                        default:
-                            Console.WriteLine(k_InvalidMove);
-                            continue;
+                        Console.WriteLine(k_InvalidMove);
+                        continue;
                     }
 
-                     return new Position(row - 1, column);
+                    return new Position(row - 1, colNumber);
                 }
 
                 Console.WriteLine(k_InvalidMove);
@@ -143,7 +124,6 @@ namespace B15_Ex02_1
 
             while (true)
             {
-
                 // Getting the first player name from the user
                 string firstPlayerName = Console.ReadLine();
 
@@ -160,7 +140,6 @@ namespace B15_Ex02_1
         internal void printErrorMsg()
         {
             Console.WriteLine(k_InvalidMove);
-            Console.ReadLine();
         }
 
         internal void printNoPossibleMsg()
@@ -184,6 +163,15 @@ namespace B15_Ex02_1
 
             return anotherGame;
         }
+
+        internal void printDrawMsg()
+        {
+            Console.WriteLine(k_DrawMsg);
+        }
+
+        internal void printScore(Player i_Player)
+        {
+            Console.WriteLine(string.Format(k_ScoreMsg, i_Player.Name, i_Player.Score));
+        }
     }
 }
-

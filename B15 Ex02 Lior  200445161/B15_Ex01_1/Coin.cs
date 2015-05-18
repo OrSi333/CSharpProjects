@@ -16,19 +16,19 @@ namespace B15_Ex02_1
 
         public Coin(eCoinColor i_Color)
         {
-            this.m_Color = i_Color;
+            m_Color = i_Color;
         }
 
         public eCoinColor Color
         {
             get
             {
-                return this.m_Color;
+                return m_Color;
             }
 
             set
             {
-                this.m_Color = value;
+                m_Color = value;
             }
         }
     }

@@ -12,12 +12,12 @@ namespace B15_Ex02_1
         {
             get
             {
-                return this.m_Coin;
+                return m_Coin;
             }
 
             set
             {
-                this.m_Coin = value;
+                m_Coin = value;
             }
         }
     }
