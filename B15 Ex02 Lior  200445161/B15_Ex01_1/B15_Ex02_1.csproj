@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Ai.cs" />
+    <Compile Include="AI.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="BoardFormat.cs" />
     <Compile Include="Cell.cs" />
@@ -41,6 +41,7 @@
     <Compile Include="Direction.cs" />
     <Compile Include="GameEngine.cs" />
     <Compile Include="Logics.cs" />
+    <Compile Include="Move.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />

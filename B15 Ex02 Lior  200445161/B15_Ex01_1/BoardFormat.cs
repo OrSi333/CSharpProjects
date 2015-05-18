@@ -13,7 +13,6 @@ namespace B15_Ex02_1
             boardToString.Append("  ");
             boardToString.Append(getColumnLetters(i_Board.getSizeOfBoard));
             boardToString.Append(Environment.NewLine);
-
             boardToString.Append(getEqualLine(i_Board.getSizeOfBoard));
             boardToString.Append(Environment.NewLine);
             boardToString.Append(boardLines(i_Board));
