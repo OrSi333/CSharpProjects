@@ -7,7 +7,15 @@ namespace Ex03.GarageLogic
     //TODO: Documentation
     abstract class PowerSource
     {
-        protected float m_MaxPowerCapacity;
-        protected float m_CurrPowerCapacity;
+        protected float m_CurrentQuantity;
+        protected float m_MaxCapacity;
+
+        protected void charge(float i_Quantity)
+        {
+            if (m_CurrentQuantity + i_Quantity > m_MaxCapacity)
+            {
+                throw new ValueOutOfRangeException(m_CurrentQuantity, m_MaxCapacity, i_Quantity);
+            }
+        }
     }
 }
