@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E91E6921-F9DB-47A2-B541-131D6D150360}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{96E5A009-7FE3-4EC9-AA9E-7B8515DC22B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>B15_Ex02_1</RootNamespace>
-    <AssemblyName>B15_Ex01_1</AssemblyName>
+    <RootNamespace>Ex03.GarageLogic</RootNamespace>
+    <AssemblyName>Ex03.GarageLogic</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>9b75168d</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,32 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AI.cs" />
-    <Compile Include="Board.cs" />
-    <Compile Include="BoardFormat.cs" />
-    <Compile Include="Cell.cs" />
-    <Compile Include="Coin.cs" />
-    <Compile Include="Direction.cs" />
-    <Compile Include="GameEngine.cs" />
-    <Compile Include="Logics.cs" />
-    <Compile Include="Move.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Position.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="UserInterface.cs" />
-    <Compile Include="InputValidator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Ex02.ConsoleUtils">
-      <HintPath>C:\Temp\Ex02.ConsoleUtils.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Ex02.ConsoleUtils.dll" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wheel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
