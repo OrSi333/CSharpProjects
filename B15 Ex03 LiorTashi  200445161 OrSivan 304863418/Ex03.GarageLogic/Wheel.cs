@@ -19,12 +19,11 @@ namespace Ex03.GarageLogic
             m_currentAirPressure = m_maxAirPressure;
         }
 
-        //TODO: Add the correct exception
         internal void InflateWheel(float i_AirToAdd)
         {
             if (m_currentAirPressure + i_AirToAdd > m_maxAirPressure)
             {
-                throw new Exception();
+                throw new ValueOutOfRangeException(m_currentAirPressure, m_maxAirPressure, i_AirToAdd);
             }
             else
             {

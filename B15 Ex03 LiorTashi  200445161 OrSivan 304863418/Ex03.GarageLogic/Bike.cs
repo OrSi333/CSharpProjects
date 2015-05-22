@@ -7,7 +7,6 @@ namespace Ex03.GarageLogic
     //TODO: Make the class
     internal class Bike : Vehicle
     {
-
         private eLisenceType m_licenseType;
         private int m_motorVolume;
 
