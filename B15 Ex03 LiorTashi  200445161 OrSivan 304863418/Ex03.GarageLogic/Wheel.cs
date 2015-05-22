@@ -31,5 +31,21 @@ namespace Ex03.GarageLogic
                 m_currentAirPressure += i_AirToAdd;
             }
         }
+
+        internal float CurrentAirPresusre
+        {
+            get
+            {
+                return m_currentAirPressure;
+            }
+        }
+
+        internal float AirToFill
+        {
+            get
+            {
+                return m_maxAirPressure - m_currentAirPressure;
+            }
+        }
     }
 }
