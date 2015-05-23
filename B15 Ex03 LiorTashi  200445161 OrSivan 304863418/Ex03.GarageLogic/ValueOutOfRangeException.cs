@@ -25,10 +25,10 @@ namespace Ex03.GarageLogic
             get { return m_Quantity; }
         }
 
-        public ValueOutOfRangeException (float i_CurrentQuantity, float i_MaxCapacity, float i_Quantity) 
+        public ValueOutOfRangeException (float i_CurrentQuantity, float i_MaxCapacity, float i_Quantity)
             // sending two params to the base CTOR:
-            : base(string.Format("Error, you are trying to fill the engine with {0} fuel when the current capacity of the engine is {1}, but the max capacity is {2}", i_Quantity, i_CurrentQuantity, i_MaxCapacity);
-        { }
-        }
+            : base(string.Format("Error, you are trying to fill the engine with {0} fuel when the current capacity of the engine is {1}, but the max capacity is {2}", i_Quantity, i_CurrentQuantity, i_MaxCapacity))
+        {}
+        
     }
 }

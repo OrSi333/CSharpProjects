@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Car : Vehicle
+    abstract class Car : Vehicle
     {
         private eColor m_carColor;
         private eNumberOfDoors m_numOfDoors;
@@ -33,5 +33,11 @@ namespace Ex03.GarageLogic
             Four,
             Five
         };
+
+        public override string ToString()
+        {
+            string allInfo = base.ToString();
+            allInfo += string.Format("Car color: {0}{1}The car contains {2} doors{3}", m_carColor, Environment.NewLine, m_numOfDoors, Environment.NewLine);
+        }
     }
 }

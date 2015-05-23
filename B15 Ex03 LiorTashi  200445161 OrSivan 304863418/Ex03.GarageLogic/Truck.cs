@@ -15,5 +15,18 @@ namespace Ex03.GarageLogic
             m_currBagageWeight = i_CurrBagageWeight;
             m_isCarringDangerMat = i_IsCarringDangerMat;
         }
+
+        public override string ToString()
+        {
+            string allInfo = base.ToString();
+            string containsHazard = "";
+            if (!m_isCarringDangerMat)
+            {
+                containsHazard = "doesn't ";
+            }
+            allInfo += string.Format("Truck's current bagage weight {0}{1}The truck {2}contains dangerous materials",
+                m_currBagageWeight, Environment.NewLine, containsHazard, Environment.NewLine);
+            return allInfo;
+        }
     }
 }
