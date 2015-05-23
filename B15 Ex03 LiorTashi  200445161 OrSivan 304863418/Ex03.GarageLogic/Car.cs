@@ -8,17 +8,17 @@ namespace Ex03.GarageLogic
     {
         private eColor m_carColor;
         private eNumberOfDoors m_numOfDoors;
-        private PowerSource m_powerSource;
+        private Engine m_engine;
 
-        internal Car(eColor i_CarColor, eNumberOfDoors i_NumOfDoors, PowerSource i_PowerSource ,string i_ModelName, string i_LicenseNumber, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure):
-            base(i_ModelName, i_LicenseNumber,i_PowerSource , i_NumOfWheels, i_WheelMakerName, i_WheelMaxAirPressure)
+        internal Car(eColor i_CarColor, eNumberOfDoors i_NumOfDoors, Engine i_Engine ,string i_ModelName, string i_LicenseNumber, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure):
+            base(i_ModelName, i_LicenseNumber,i_Engine , i_NumOfWheels, i_WheelMakerName, i_WheelMaxAirPressure)
         {
             m_carColor = i_CarColor;
             m_numOfDoors = i_NumOfDoors;
         }
             
 
-        internal enum eColor
+        internal protected enum eColor
         {
             Green,
             Black,
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
             Red
         };
 
-        internal enum eNumberOfDoors
+        internal protected enum eNumberOfDoors
         {
             Two,
             Three,
@@ -38,6 +38,7 @@ namespace Ex03.GarageLogic
         {
             string allInfo = base.ToString();
             allInfo += string.Format("Car color: {0}{1}The car contains {2} doors{3}", m_carColor, Environment.NewLine, m_numOfDoors, Environment.NewLine);
+            return allInfo;
         }
     }
 }

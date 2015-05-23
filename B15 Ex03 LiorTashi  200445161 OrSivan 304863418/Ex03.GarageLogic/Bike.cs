@@ -10,14 +10,14 @@ namespace Ex03.GarageLogic
         private eLisenceType m_licenseType;
         private int m_motorVolume;
 
-        internal Bike(eLisenceType i_LisenceType, int i_MotorVolume, PowerSource i_Engine, string i_ModelName, string i_LicenseNumber, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure) :
+        internal Bike(eLisenceType i_LisenceType, int i_MotorVolume, Engine i_Engine, string i_ModelName, string i_LicenseNumber, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure) :
             base(i_ModelName, i_LicenseNumber, i_Engine, i_NumOfWheels, i_WheelMakerName, i_WheelMaxAirPressure)
         {
             m_licenseType = i_LisenceType;
             m_motorVolume = i_MotorVolume;
         }
 
-        internal enum eLisenceType
+        internal protected enum eLisenceType
         {
             A,
             A2,
@@ -29,6 +29,7 @@ namespace Ex03.GarageLogic
         {
             string allInfo = base.ToString();
             allInfo += string.Format("Engine volume: {0}{1}License type: {2},{3}", m_motorVolume, Environment.NewLine, m_licenseType, Environment.NewLine);
+            return allInfo;
         }
     }
 }

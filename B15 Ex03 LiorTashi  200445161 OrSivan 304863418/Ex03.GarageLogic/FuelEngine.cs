@@ -19,22 +19,15 @@ namespace Ex03.GarageLogic
         {
             if (!(i_FuelType == m_fuelType))
             {
-                throw ArgumentException("This engine takes {0} fuel, but you tried to insert {1}!", m_fuelType, i_FuelType);
+                string errorMsg = string.Format("This engine takes {0} fuel, but you tried to insert {1}!", m_fuelType.ToString(), i_FuelType.ToString());
+                throw new ArgumentException(errorMsg);
             }
             if (m_CurrentQuantity + i_FuelToAdd > m_MaxCapacity)
             {
-                throw ValueOutOfRangeException(m_CurrentQuantity, m_MaxCapacity, i_FuelToAdd);
+                throw new ValueOutOfRangeException(m_CurrentQuantity, m_MaxCapacity, i_FuelToAdd);
             }
             base.addQuantity(i_FuelToAdd);
         }
-
-        internal enum eFuelType
-        {
-            Soler,
-            Octan95,
-            Octan96,
-            Octan98
-        };
 
         eFuelType FuelType
         {

@@ -12,15 +12,15 @@ namespace Ex03.GarageLogic
         protected Wheel[] m_WheelSet;
         protected Engine m_Engine;
 
-        internal Vehicle(string i_ModelName, string i_LicenseNumber, PowerSource i_Engine, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure)
+        internal Vehicle(string i_ModelName, string i_LicenseNumber, Engine i_Engine, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure)
         {
             m_licenseNumber = i_LicenseNumber;
             m_modelName = i_ModelName;
             m_Engine = i_Engine;
             m_WheelSet = new Wheel[i_NumOfWheels];
-            foreach (Wheel wheel in m_WheelSet)
+            for (int i = 0; i < m_WheelSet.Length; i++)
             {
-                wheel = new Wheel(i_WheelMakerName, i_WheelMaxAirPressure);
+                m_WheelSet[i] = new Wheel(i_WheelMakerName, i_WheelMaxAirPressure);
             }
 
         }
@@ -56,7 +56,16 @@ namespace Ex03.GarageLogic
 
         public override bool Equals(object obj)
         {
-            (obj as Vehicle).m_licenseNumber.Equals(this.m_licenseNumber);
+            bool equals = false;
+            if (obj is Vehicle)
+            {
+                equals = m_licenseNumber.Equals(this.m_licenseNumber);
+            }
+            else
+            {
+                throw new InvalidCastException();
+            }
+            return equals;
         }
 
         public static bool operator ==(Vehicle i_Vehicle1, Vehicle i_Vehicle2)
@@ -84,7 +93,7 @@ namespace Ex03.GarageLogic
         public static bool operator >(Vehicle i_Vehicle1, Vehicle i_Vehicle2)
         {
             bool v1IsBigger = false;
-            if (int.Parse(i_Vehicle1.m_licenseNumber)>int.Parse(i_Vehicle2.m_licenseNumber))
+            if (StringUtils.compareEachCharInString(i_Vehicle1.m_licenseNumber, i_Vehicle2.m_licenseNumber))
             {
                 v1IsBigger = true;
             }
@@ -95,13 +104,15 @@ namespace Ex03.GarageLogic
         public static bool operator <(Vehicle i_Vehicle1, Vehicle i_Vehicle2)
         {
             bool v1IsSmaller = false;
-            if (int.Parse(i_Vehicle1.m_licenseNumber) < int.Parse(i_Vehicle2.m_licenseNumber))
+            if (StringUtils.compareEachCharInString(i_Vehicle2.m_licenseNumber,i_Vehicle1.m_licenseNumber))
             {
                 v1IsSmaller = true;
             }
-
+            
             return v1IsSmaller;
         }
+
+
 
 
 

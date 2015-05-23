@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
             
         }
         
-        float RemainingPowerTime
+        internal float RemainingPowerTime
         {
             get
             {
@@ -21,7 +21,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        float MaxPowerTime
+        internal float MaxPowerTime
         {
             get
             {
@@ -33,7 +33,7 @@ namespace Ex03.GarageLogic
         {
             if (m_CurrentQuantity + i_HoursToAdd > m_MaxCapacity)
             {
-                throw ValueOutOfRangeException(m_CurrentQuantity, m_MaxCapacity, i_HoursToAdd);
+                throw new ValueOutOfRangeException(m_CurrentQuantity, m_MaxCapacity, i_HoursToAdd);
             }
             base.addQuantity(i_HoursToAdd);
         }
