@@ -11,19 +11,21 @@ namespace Ex03.GarageLogic
         protected float m_EnergyLeft;
         protected Wheel[] m_WheelSet;
         protected Engine m_Engine;
+        
 
-        internal Vehicle(string i_ModelName, string i_LicenseNumber, Engine i_Engine, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure)
+        protected Vehicle(Models.VehicleModel i_Model)
         {
-            m_licenseNumber = i_LicenseNumber;
-            m_modelName = i_ModelName;
-            m_Engine = i_Engine;
-            m_WheelSet = new Wheel[i_NumOfWheels];
+            m_licenseNumber = i_Model.m_licenseNumber;
+            m_modelName = i_Model.m_modelName;
+            m_WheelSet = new Wheel[i_Model.m_NumOfWheels];
             for (int i = 0; i < m_WheelSet.Length; i++)
             {
-                m_WheelSet[i] = new Wheel(i_WheelMakerName, i_WheelMaxAirPressure);
+                m_WheelSet[i] = new Wheel(i_Model.m_WheelMakerName, i_Model.m_WheelMaxAirPressure);
             }
 
         }
+
+        
 
         internal void InflateAllWheelsToMax()
         {
@@ -53,14 +55,20 @@ namespace Ex03.GarageLogic
 
         //The following methods will override comparison operators in order to allow collections to sort them.
         //The comparison will be preformed by the vehicles license number.
+        //The comparison also supports comparing with another string contning the license number, to enable collection comparison
 
         public override bool Equals(object obj)
         {
             bool equals = false;
             if (obj is Vehicle)
             {
-                equals = m_licenseNumber.Equals(this.m_licenseNumber);
+                equals = (Vehicle)obj.m_licenseNumber.Equals(this.m_licenseNumber);
             }
+            else if (obj is string)
+            {
+                equals = (String)obj.Equals(this.m_licenseNumber);
+            }
+
             else
             {
                 throw new InvalidCastException();
@@ -89,34 +97,6 @@ namespace Ex03.GarageLogic
 
             return vehiclesAreNotEqual;
         }
-
-        public static bool operator >(Vehicle i_Vehicle1, Vehicle i_Vehicle2)
-        {
-            bool v1IsBigger = false;
-            if (StringUtils.compareEachCharInString(i_Vehicle1.m_licenseNumber, i_Vehicle2.m_licenseNumber))
-            {
-                v1IsBigger = true;
-            }
-
-            return v1IsBigger;
-        }
-
-        public static bool operator <(Vehicle i_Vehicle1, Vehicle i_Vehicle2)
-        {
-            bool v1IsSmaller = false;
-            if (StringUtils.compareEachCharInString(i_Vehicle2.m_licenseNumber,i_Vehicle1.m_licenseNumber))
-            {
-                v1IsSmaller = true;
-            }
-            
-            return v1IsSmaller;
-        }
-
-
-
-
-
-
 
     }
 }

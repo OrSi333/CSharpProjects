@@ -5,7 +5,7 @@ using System.Text;
 namespace Ex03.GarageLogic
 {
     //TODO: Make the class
-    abstract internal class Bike : Vehicle
+    internal class Bike : Vehicle
     {
         private eLisenceType m_licenseType;
         private int m_motorVolume;
@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
             m_motorVolume = i_MotorVolume;
         }
 
-        internal protected enum eLisenceType
+        internal enum eLisenceType
         {
             A,
             A2,

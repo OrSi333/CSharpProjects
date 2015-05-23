@@ -16,6 +16,28 @@ namespace Ex03.GarageLogic
             (m_Engine as FuelEngine).addFuel(i_FuelToAdd, i_FuelType);
         }
 
-        
+        internal eFuelType FuelType
+        {
+            get
+            {
+                return (m_Engine as FuelEngine).FuelType;
+            }
+        }
+
+        internal float FuelLeft
+        {
+            get
+            {
+                return (m_Engine as FuelEngine).CurrentAmmountOfFuel;
+            }
+        }
+
+        internal float FuelCapacity
+        {
+            get
+            {
+                return (m_Engine as FuelEngine).MaxFuelCapacity;
+            }
+        }
     }
 }

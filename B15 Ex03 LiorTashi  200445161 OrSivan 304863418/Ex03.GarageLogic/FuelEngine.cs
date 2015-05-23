@@ -29,7 +29,7 @@ namespace Ex03.GarageLogic
             base.addQuantity(i_FuelToAdd);
         }
 
-        eFuelType FuelType
+        internal eFuelType FuelType
         {
             get
             {
@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        float CurrentAmmountOfFuel
+        internal float CurrentAmmountOfFuel
         {
             get
             {
@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        float MaxFuelCapacity
+        internal float MaxFuelCapacity
         {
             get
             {
