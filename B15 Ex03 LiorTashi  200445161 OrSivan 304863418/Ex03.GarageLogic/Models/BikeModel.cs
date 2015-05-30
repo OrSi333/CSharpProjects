@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic.Models
 {
     class BikeModel : VehicleModel
     {
-        internal Enums.eLisenceType m_licenseType;
+        internal eLisenceType m_licenseType;
         internal int m_motorVolume;
 
         public BikeModel(Enums.eLisenceType i_LisenceType, int i_MotorVolume, string i_ModelName, string i_LicenseNumber, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure) :
