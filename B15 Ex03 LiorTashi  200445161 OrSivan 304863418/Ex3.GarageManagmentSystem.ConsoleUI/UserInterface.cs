@@ -46,6 +46,8 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
     UserInterfaceHandler.getEnumValuesInList<eVehicleStatus>());
 
         private const string k_KindOfVehicle =
+
+            // should eVehicleType???!?
 @"What type of vehicle?
 1. Bike.
 2. Electric Bike.
@@ -113,8 +115,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
         private void changeStateOfVehicle()
         {
-            Console.WriteLine(k_EnterLicensePlate);
-            string licensePlate = UserInterfaceHandler.getUserInput<string>();
+            string licensePlate = getLicensePlate();
 
             //if....
             // need to check if the vehicle exist in the garage(also in the other methods below).
@@ -125,18 +126,24 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
             // should call the getVehicleFromGarage() and set its status to the desired state above.
         }
 
-        private void seeVehicleDetails()
+        private static string getLicensePlate()
         {
             Console.WriteLine(k_EnterLicensePlate);
             string licensePlate = UserInterfaceHandler.getUserInput<string>();
+
+            return licensePlate;
+        }
+
+        private void seeVehicleDetails()
+        {
+            string licensePlate = getLicensePlate();
 
             // need to call here the getVehicleFromGarage method from garage logic.
         }
 
         private void refuleVehicle(bool isElectric)
         {
-            Console.WriteLine(k_EnterLicensePlate);
-            string licensePlate = UserInterfaceHandler.getUserInput<string>();
+            string licensePlate = getLicensePlate();
 
             if (!isElectric)
             {
@@ -152,8 +159,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
         private void inflateWheels()
         {
-            Console.WriteLine(k_EnterLicensePlate);
-            string licensePlate = UserInterfaceHandler.getUserInput<string>();
+            string licensePlate = getLicensePlate();
 
             // need to call here the getVehicleFromGarage method from garage logic.
         }
@@ -167,6 +173,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
         {
             creatNewVehicle();
             Console.Out.WriteLine(k_KindOfVehicle);
+            // THIS SHOULD BE CHANGE, IF WE'LL SUPPORT A NEW VEHICLE TYPE THE SWITCH WILL FAIL HERE.
             int userInput = getUserMenuSelection(1, 5);
 
             switch (userInput)
@@ -191,12 +198,10 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
         private void creatNewVehicle()
         {
+            string licensePlate = getLicensePlate();
+
             Console.WriteLine(k_EnterModelName);
             string modelName = UserInterfaceHandler.getUserInput<string>();
-
-            Console.WriteLine(k_EnterLicensePlate);
-            string licensePlate = UserInterfaceHandler.getUserInput<string>();
-
 
             Console.WriteLine(k_EnterMaximumAirPressure);
             float maxAirPressure = UserInterfaceHandler.getUserInput<float>();
