@@ -40,7 +40,7 @@ namespace Ex03.GarageLogic
                 case 2: return (makeElectricBike(i_Model as ElectricBikeModel));
                 case 3: return (makeRegularBike(i_Model as FuelBikeModel));
                 case 4: return (makeTruck(i_Model as TruckModel));
-                default: throw new ArgumentException("This type of vehicle is not supported", i_Model.ToString());
+                default: throw new ArgumentException("This type of vehicle is not supported");
             }
         }
 
@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic
             if ((i_Model.m_fuelType != eFuelType.Octan98 || i_Model.m_EngineCapacity != 8f) ||
                 (i_Model.m_NumOfWheels != 2 || i_Model.m_WheelMaxAirPressure != 34))
             {
-                throw new ArgumentException("This type of fuel bike is not supported", i_Model.ToString());
+                throw new ArgumentException("This type of fuel bike is not supported");
             }
             
             return new FuelBike(i_Model);

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
@@ -26,27 +26,10 @@ namespace Ex03.GarageLogic
             }
         }
 
-        //TODO: present all numbers
-        public List<string> getAllVehiclesInGarage()
+        //TODO:
+        public string getAllLisenceNumbers()
         {
             return null;
-        }
-
-        public List<string> getAllVehiclesInGarage(eVehicleState state)
-        {
-            List<string> allVehiclesInState = new List<string>();
-            //foreach (string vehicleNum in m_vehiclesInGarage)
-            //{
-            //    VehicleDetails details;
-            //    if (m_vehiclesInGarage.TryGetValue(vehicleNum, out details))
-            //    {
-            //        if (details.VehicleState == state)
-            //        {
-            //            allVehiclesInState.Add(vehicleNum);
-            //        }
-            //    }
-            //}
-            return allVehiclesInState;
         }
 
         public void changeVehicleState(string i_LicenseNum, eVehicleState i_State)
@@ -62,6 +45,7 @@ namespace Ex03.GarageLogic
             }
         }
 
+        //TODO:
         public void inflateWheelsToMax(string i_LicenseNum)
         {
             
@@ -73,6 +57,21 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException(vehicleNotFound, i_LicenseNum);
             }
+        }
+
+        public void addFuel(string i_VehicleNumber,eFuelType i_FuelType, float i_FuelToAdd)
+        {
+
+        }
+
+        public void charge(string i_VehicleNumber, float i_FuelToAdd)
+        {
+
+        }
+
+        public string getAllDataOnVehicle(string i_VehicleNumber)
+        {
+
         }
 
         public enum eVehicleState
