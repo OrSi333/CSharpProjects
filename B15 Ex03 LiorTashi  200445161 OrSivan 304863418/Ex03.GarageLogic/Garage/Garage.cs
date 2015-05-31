@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
                 vehicleDetails.VehicleState = eVehicleState.Fixing;
                 string errorMgs = string.Format("Vehicle alredy exsist in the garage!{0}This operation will cause the vehicle to move back to {1} state",
                     Environment.NewLine, eVehicleState.Fixing);
-                throw new ArgumentException(errorMgs, i_LicenseNum);
+                throw new ArgumentException(errorMgs, i_Model.m_licenseNumber);
             }
             else
             {
@@ -29,30 +29,30 @@ namespace Ex03.GarageLogic
         //TODO: present all numbers
         public List<string> getAllVehiclesInGarage()
         {
-            return m_vehiclesInGarage.Keys;
+            return null;
         }
 
         public List<string> getAllVehiclesInGarage(eVehicleState state)
         {
             List<string> allVehiclesInState = new List<string>();
-            foreach (string vehicleNum in m_vehiclesInGarage)
-            {
-                VehicleDetails details;
-                if (m_vehiclesInGarage.TryGetValue(vehicleNum, out details))
-                {
-                    if (details.VehicleState == state)
-                    {
-                        allVehiclesInState.Add(vehicleNum);
-                    }
-                }
-            }
+            //foreach (string vehicleNum in m_vehiclesInGarage)
+            //{
+            //    VehicleDetails details;
+            //    if (m_vehiclesInGarage.TryGetValue(vehicleNum, out details))
+            //    {
+            //        if (details.VehicleState == state)
+            //        {
+            //            allVehiclesInState.Add(vehicleNum);
+            //        }
+            //    }
+            //}
             return allVehiclesInState;
         }
 
         public void changeVehicleState(string i_LicenseNum, eVehicleState i_State)
         {
             VehicleDetails vehicleDetails;
-            if (m_vehiclesInGarage.TryGetValue(i_Vehicle, out vehicleDetails))
+            if (m_vehiclesInGarage.TryGetValue(i_LicenseNum, out vehicleDetails))
             {
                 vehicleDetails.VehicleState = i_State;
             }
@@ -64,9 +64,10 @@ namespace Ex03.GarageLogic
 
         public void inflateWheelsToMax(string i_LicenseNum)
         {
-            if (m_vehiclesInGarage.ContainsKey(m_vehiclesInGarage))
+            
+            if (m_vehiclesInGarage.ContainsKey(i_LicenseNum))
             {
-                vehicleDetails.VehicleState = i_State;
+                
             }
             else
             {

@@ -67,7 +67,7 @@ namespace Ex03.GarageLogic
             }
             else if (obj is string)
             {
-                equals = (String)obj.Equals(this.m_licenseNumber);
+                equals = ((String)obj).Equals(this.m_licenseNumber);
             }
 
             else

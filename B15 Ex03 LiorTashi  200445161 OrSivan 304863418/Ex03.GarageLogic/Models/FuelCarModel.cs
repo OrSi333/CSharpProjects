@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic.Models
     {
         internal eFuelType m_fuelType;
 
-        public FuelCarModel(float i_EngineCapacity, float i_EngineCurrentEnergy, string i_ModelName, string i_LicenseNum, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure, eColor i_Color, eNumberOfDoors i_NumOfDoors) :
+        public FuelCarModel(eFuelType i_FuelType, float i_EngineCapacity, float i_EngineCurrentEnergy, string i_ModelName, string i_LicenseNum, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure, eColor i_Color, eNumberOfDoors i_NumOfDoors) :
             base(i_ModelName, i_LicenseNum, i_NumOfWheels, i_WheelMakerName, i_WheelMaxAirPressure, i_Color, i_NumOfDoors)
         {
             m_EngineCapacity = i_EngineCapacity;

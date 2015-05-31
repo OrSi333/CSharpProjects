@@ -13,8 +13,8 @@ namespace Ex03.GarageLogic
         internal Car(Models.CarModel i_Model):
             base(i_Model)
         {
-            m_carColor = i_CarColor;
-            m_numOfDoors = i_NumOfDoors;
+            m_carColor = i_Model.m_carColor;
+            m_numOfDoors = i_Model.m_numOfDoors;
         }
         
         public override string ToString()
