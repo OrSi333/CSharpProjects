@@ -15,9 +15,9 @@ namespace Ex03.GarageLogic
             VehicleDetails vehicleDetails;
             if (m_vehiclesInGarage.TryGetValue(i_Model.m_licenseNumber, out vehicleDetails))
             {
-                vehicleDetails.VehicleState = eVehicleState.Fixing;
+                vehicleDetails.VehicleState = eVehicleStatus.Fixed;
                 string errorMgs = string.Format("Vehicle alredy exsist in the garage!{0}This operation will cause the vehicle to move back to {1} state",
-                    Environment.NewLine, eVehicleState.Fixing);
+                    Environment.NewLine, eVehicleStatus.Fixed);
                 throw new ArgumentException(errorMgs, i_Model.m_licenseNumber);
             }
             else
@@ -32,7 +32,7 @@ namespace Ex03.GarageLogic
             return null;
         }
 
-        public void changeVehicleState(string i_LicenseNum, eVehicleState i_State)
+        public void changeVehicleState(string i_LicenseNum, eVehicleStatus i_State)
         {
             VehicleDetails vehicleDetails;
             if (m_vehiclesInGarage.TryGetValue(i_LicenseNum, out vehicleDetails))
@@ -72,13 +72,7 @@ namespace Ex03.GarageLogic
         public string getAllDataOnVehicle(string i_VehicleNumber)
         {
 
+            return null;
         }
-
-        public enum eVehicleState
-        {
-            Fixing,
-            Fixed,
-            Payed
-        };
     }
 }
