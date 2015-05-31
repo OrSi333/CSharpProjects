@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic.Models
 {
-    class BikeModel : VehicleModel
+    public class BikeModel : VehicleModel
     {
         internal Enums.eLisenceType m_licenseType;
         internal int m_motorVolume;

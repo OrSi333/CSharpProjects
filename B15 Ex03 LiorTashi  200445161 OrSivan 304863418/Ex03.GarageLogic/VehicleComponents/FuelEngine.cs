@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic.VehicleComponents
 {

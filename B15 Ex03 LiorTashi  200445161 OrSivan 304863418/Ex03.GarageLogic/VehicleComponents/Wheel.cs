@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic.VehicleComponents
 {
-    internal class Wheel
+    public class Wheel
     {
         private string m_makerName;
         private float m_currentAirPressure;

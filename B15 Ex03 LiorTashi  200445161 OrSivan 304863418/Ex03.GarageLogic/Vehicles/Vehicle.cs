@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ex03.GarageLogic.VehicleComponents;
 
 namespace Ex03.GarageLogic
 {
-    abstract internal class Vehicle
+    abstract public class Vehicle
     {
         private string m_modelName;
         private string m_licenseNumber;
@@ -62,7 +63,7 @@ namespace Ex03.GarageLogic
             bool equals = false;
             if (obj is Vehicle)
             {
-                equals = (Vehicle)obj.m_licenseNumber.Equals(this.m_licenseNumber);
+                equals = ((Vehicle)obj).m_licenseNumber.Equals(this.m_licenseNumber);
             }
             else if (obj is string)
             {

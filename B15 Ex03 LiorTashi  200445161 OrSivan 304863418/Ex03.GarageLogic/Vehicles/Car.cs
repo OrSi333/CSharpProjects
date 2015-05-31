@@ -6,8 +6,8 @@ namespace Ex03.GarageLogic
 {
     class Car : Vehicle
     {
-        private eColor m_carColor;
-        private eNumberOfDoors m_numOfDoors;
+        private Enums.eColor m_carColor;
+        private Enums.eNumberOfDoors m_numOfDoors;
 
         internal Car(Models.CarModel i_Model):
             base(i_Model)

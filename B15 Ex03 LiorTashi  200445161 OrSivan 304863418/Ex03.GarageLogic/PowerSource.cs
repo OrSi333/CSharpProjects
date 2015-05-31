@@ -16,6 +16,10 @@ namespace Ex03.GarageLogic
             {
                 throw new ValueOutOfRangeException(m_CurrentQuantity, m_MaxCapacity, i_Quantity);
             }
+            else
+            {
+                m_CurrentQuantity += i_Quantity;
+            }
         }
     }
 }

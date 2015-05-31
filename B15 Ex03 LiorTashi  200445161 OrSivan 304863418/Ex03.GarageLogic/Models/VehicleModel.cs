@@ -11,6 +11,8 @@ namespace Ex03.GarageLogic.Models
         internal int m_NumOfWheels;
         internal string m_WheelMakerName;
         internal float m_WheelMaxAirPressure;
+        protected internal float m_EngineCapacity;
+        protected internal float m_EngineCurrentEnergy;
 
         public VehicleModel(string i_ModelName, string i_LicenseNum, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure)
         {

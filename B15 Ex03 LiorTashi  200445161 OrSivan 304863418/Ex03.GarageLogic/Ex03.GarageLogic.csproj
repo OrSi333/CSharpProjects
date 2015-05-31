@@ -36,6 +36,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\eLisenceType.cs" />
+    <Compile Include="Models\ElectricBikeModel.cs" />
+    <Compile Include="Models\ElectricCarModel.cs" />
+    <Compile Include="Models\FuelBikeModel.cs" />
+    <Compile Include="Models\FuelCarModel.cs" />
     <Compile Include="Models\TruckModel.cs" />
     <Compile Include="Vehicles\Bike.cs" />
     <Compile Include="Vehicles\Car.cs" />

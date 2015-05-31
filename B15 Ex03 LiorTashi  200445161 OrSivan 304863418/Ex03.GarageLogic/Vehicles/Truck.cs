@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ex03.GarageLogic.VehicleComponents;
 
 namespace Ex03.GarageLogic
 {
@@ -9,11 +10,11 @@ namespace Ex03.GarageLogic
         private bool m_isCarringDangerMat;
         private float m_currBagageWeight;
 
-        internal Truck(bool i_IsCarringDangerMat, float i_CurrBagageWeight, Engine i_Engine ,string i_ModelName, string i_LicenseNumber, int i_NumOfWheels, string i_WheelMakerName, float i_WheelMaxAirPressure):
-            base(i_ModelName, i_LicenseNumber, i_Engine, i_NumOfWheels, i_WheelMakerName, i_WheelMaxAirPressure)
+        internal Truck(Models.TruckModel i_Model):
+            base(i_Model)
         {
-            m_currBagageWeight = i_CurrBagageWeight;
-            m_isCarringDangerMat = i_IsCarringDangerMat;
+            m_currBagageWeight = i_Model.m_currBagageWeight;
+            m_isCarringDangerMat = i_Model.m_isCarringDangerMat; ;
         }
 
         public override string ToString()

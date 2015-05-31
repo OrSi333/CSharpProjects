@@ -6,8 +6,8 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        private Dictionary<Vehicle, VehicleDetails> m_vehiclesInGarage;
-        private const string vehicleNotFounderr = "The vehicle doesn't exsist in the garage!";
+        private Dictionary<string, VehicleDetails> m_vehiclesInGarage;
+        private const string vehicleNotFound = "The vehicle doesn't exsist in the garage!";
         private VehiclesMaker vehicleMaker;
 
         public void addVehicleToGarage(Models.VehicleModel i_Model, string i_OwnerName, string i_OwnerPhoneNum)
@@ -22,11 +22,32 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                m_vehiclesInGarage.Add("", new VehicleDetails(i_OwnerName, i_OwnerPhoneNum));
+                m_vehiclesInGarage.Add(i_Model.m_licenseNumber, new VehicleDetails(i_OwnerName, i_OwnerPhoneNum,vehicleMaker.makeVehicle(i_Model)));
             }
         }
 
         //TODO: present all numbers
+        public List<string> getAllVehiclesInGarage()
+        {
+            return m_vehiclesInGarage.Keys;
+        }
+
+        public List<string> getAllVehiclesInGarage(eVehicleState state)
+        {
+            List<string> allVehiclesInState = new List<string>();
+            foreach (string vehicleNum in m_vehiclesInGarage)
+            {
+                VehicleDetails details;
+                if (m_vehiclesInGarage.TryGetValue(vehicleNum, out details))
+                {
+                    if (details.VehicleState == state)
+                    {
+                        allVehiclesInState.Add(vehicleNum);
+                    }
+                }
+            }
+            return allVehiclesInState;
+        }
 
         public void changeVehicleState(string i_LicenseNum, eVehicleState i_State)
         {
@@ -37,7 +58,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException(vehicleNotFounderr, i_LicenseNum);
+                throw new ArgumentException(vehicleNotFound, i_LicenseNum);
             }
         }
 
@@ -49,7 +70,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException(vehicleNotFounderr, i_LicenseNum);
+                throw new ArgumentException(vehicleNotFound, i_LicenseNum);
             }
         }
 
