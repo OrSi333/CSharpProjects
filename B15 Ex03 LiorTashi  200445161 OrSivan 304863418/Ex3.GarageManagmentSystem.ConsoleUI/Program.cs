@@ -6,14 +6,11 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 {
     class Program
     {
-        public static void Main() 
+        public static void Main()
         {
             UserInterface userInterface = new UserInterface();
 
             userInterface.openGarage();
-        public static void Main(string[] args)
-        {
-
         }
     }
 }
