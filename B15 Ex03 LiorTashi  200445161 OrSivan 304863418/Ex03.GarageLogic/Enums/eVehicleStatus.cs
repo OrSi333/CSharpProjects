@@ -4,11 +4,10 @@ using System.Text;
 
 namespace Ex03.GarageLogic.Enums
 {
-    public enum eNumberOfDoors
+    public enum eVehicleStatus
     {
-        Two = 1,
-        Three,
-        Four,
-        Five
-    };
+        Paid = 1,
+        Fixed,
+        Repairing
+    }
 }

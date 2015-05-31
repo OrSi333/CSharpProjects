@@ -79,8 +79,6 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 @"What is the vehicle fuel type? 
 {0}", 
     UserInterfaceHandler.getEnumValuesInList<eFuelType>());
-   
-
 
         public void openGarage()
         {
