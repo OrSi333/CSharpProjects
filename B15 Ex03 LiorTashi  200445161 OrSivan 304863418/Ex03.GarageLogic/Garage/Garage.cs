@@ -59,21 +59,27 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void addFuel(string i_VehicleNumber,eFuelType i_FuelType, float i_FuelToAdd)
+        public string getAllDataOnVehicle(string i_VehicleNumber)
         {
 
+            return null;
         }
 
-        public void charge(string i_VehicleNumber, float i_FuelToAdd)
+        public void addFuelOrCharge(string licensePlate, eFuelType? fuelType, float quantityToRefulOrCharge)
         {
-            VehicleDetails details = null;
-            if (m_vehiclesInGarage.TryGetValue(i_VehicleNumber, out details))
+            // fuel vehicle
+            if (fuelType != null)
             {
-                
-            }
-            else
-            {
-                throw new ArgumentException(vehicleNotFound, i_VehicleNumber);
+                //TODO
+                VehicleDetails details = null;
+                if (m_vehiclesInGarage.TryGetValue(licensePlate, out details))
+                {
+
+                }
+                else
+                {
+                    throw new ArgumentException(vehicleNotFound, licensePlate);
+                }
             }
         }
 
