@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    internal struct VehicleDetails
+    internal class VehicleDetails
     {
         private string m_ownerName;
         private string m_ownerPhoneNumber;
-        private Garage.eVehicleState m_vehicleState;
+        private eVehicleState m_vehicleState;
         private Vehicle m_vehicle;
 
         internal VehicleDetails(string i_OwnerName, string i_OwnerPhoneNum, Vehicle i_Vehicle)
