@@ -15,5 +15,10 @@ namespace Ex03.GarageLogic.Models
             m_carColor = i_Color;
             m_numOfDoors = i_NumOfDoors;
         }
+
+        public override string getAllParams()
+        {
+            return string.Format("{0}Car color{1}Number of doors{2}", base.getAllParams(), Environment.NewLine, Environment.NewLine);
+        }
     }
 }

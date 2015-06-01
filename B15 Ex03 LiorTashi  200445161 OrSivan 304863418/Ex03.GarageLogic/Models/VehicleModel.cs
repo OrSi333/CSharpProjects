@@ -6,6 +6,7 @@ namespace Ex03.GarageLogic.Models
 {
     public class VehicleModel
     {
+        protected bool finishedInit = false;
         internal string m_modelName;
         internal string m_licenseNumber;
         internal int m_NumOfWheels;
@@ -21,6 +22,12 @@ namespace Ex03.GarageLogic.Models
             m_NumOfWheels = i_NumOfWheels;
             m_WheelMakerName = i_WheelMakerName;
             m_WheelMaxAirPressure = i_WheelMaxAirPressure;
+        }
+
+        public virtual string getAllParams()
+        {
+            return string.Format("Model Name{0}License Number{1}Number of wheels{2}Wheel maker name{3}Wheels max air pressure{4}",
+                Environment.NewLine, Environment.NewLine, Environment.NewLine, Environment.NewLine, Environment.NewLine);
         }
     }
 }

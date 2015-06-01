@@ -14,5 +14,10 @@ namespace Ex03.GarageLogic.Models
             m_EngineCapacity = i_EngineCapacity;
             m_EngineCurrentEnergy = i_EngineCurrentEnergy;
         }
+
+        public override string getAllParams()
+        {
+            return string.Format("{0}Charge capacity{1}Current charge{2}", base.getAllParams(), Environment.NewLine, Environment.NewLine);
+        }
     }
 }

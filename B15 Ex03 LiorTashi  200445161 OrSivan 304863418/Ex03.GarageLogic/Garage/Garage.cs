@@ -66,13 +66,28 @@ namespace Ex03.GarageLogic
 
         public void charge(string i_VehicleNumber, float i_FuelToAdd)
         {
-
+            VehicleDetails details = null;
+            if (m_vehiclesInGarage.TryGetValue(i_VehicleNumber, out details))
+            {
+                
+            }
+            else
+            {
+                throw new ArgumentException(vehicleNotFound, i_VehicleNumber);
+            }
         }
 
         public string getAllDataOnVehicle(string i_VehicleNumber)
         {
-
-            return null;
+            VehicleDetails details = null;
+            if (m_vehiclesInGarage.TryGetValue(i_VehicleNumber, out details))
+            {
+                return details.ToString();
+            }
+            else
+            {
+                throw new ArgumentException(vehicleNotFound, i_VehicleNumber);
+            }
         }
     }
 }

@@ -33,10 +33,18 @@ namespace Ex03.GarageLogic
             }
         }
 
+        internal Vehicle Vehicle
+        {
+            get
+            {
+                return m_vehicle;
+            }
+        }
+
         public override string ToString()
         {
-            return string.Format("Owner's Name: {0}{1},Owner's Phone Number: {2}{3}Vehical's state: {4}{5}"
-                , m_ownerName, Environment.NewLine, m_ownerPhoneNumber, Environment.NewLine, m_vehicleState, Environment.NewLine);
+            return string.Format("Owner's Name: {0}{1},Owner's Phone Number: {2}{3}Vehical's state: {4}{5}Vehicle:{6}{7}{8}"
+                , m_ownerName, Environment.NewLine, m_ownerPhoneNumber, Environment.NewLine, m_vehicleState, Environment.NewLine, Environment.NewLine, m_vehicle.ToString(), Environment.NewLine);
         }
         
     }
