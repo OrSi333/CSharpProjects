@@ -16,5 +16,10 @@ namespace Ex03.GarageLogic.Models
             m_licenseType = i_LisenceType;
             m_motorVolume = i_MotorVolume;
         }
+
+        public override string getAllParams()
+        {
+            return string.Format("{0}Lisence Type{1}Motor Volume{2}",base.getAllParams(),Environment.NewLine,Environment.NewLine);
+        }
     }
 }

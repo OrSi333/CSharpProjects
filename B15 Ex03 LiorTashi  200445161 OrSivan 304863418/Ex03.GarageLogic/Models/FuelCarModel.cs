@@ -15,5 +15,10 @@ namespace Ex03.GarageLogic.Models
             m_EngineCurrentEnergy = i_EngineCurrentEnergy;
             m_fuelType = i_FuelType;
         }
+
+        public override string getAllParams()
+        {
+            return string.Format("{0}Fuel Capacity{1}Current fuel{2}Fuel type{3}", base.getAllParams(), Environment.NewLine, Environment.NewLine, Environment.NewLine);
+        }
     }
 }

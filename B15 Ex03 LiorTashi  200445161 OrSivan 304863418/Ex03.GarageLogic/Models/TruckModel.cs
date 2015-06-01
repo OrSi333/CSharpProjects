@@ -17,5 +17,10 @@ namespace Ex03.GarageLogic.Models
             m_currBagageWeight = i_CurrBagageWeight;
             m_fuelType = i_FuelType;
         }
+
+        public override string getAllParams()
+        {
+            return string.Format("{0}Is Carring hazard?{1}Current bagage weight{2}", base.getAllParams(), Environment.NewLine, Environment.NewLine);
+        }
     }
 }
