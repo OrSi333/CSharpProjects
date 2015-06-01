@@ -28,7 +28,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
         private const string k_ErrorOufOfBound = "invalid input, the value you entered is {0} but the maximum is {1}, please try again";
         private const string k_VehicleCreated = "Vehicle was created!";
 
-        private const string k_EnterMaxQuantityOfEnergy = 
+        private const string k_EnterMaxQuantityOfEnergy =
 @"Enter the car's maximum energy quantity: 
 (if its a fuel engine enter the maximum quantity of the fuel tank and if its an electric engine enter the battery maximum capacity)";
 
@@ -63,13 +63,13 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
         private string k_ColorOfCar = UserInterfaceHandler.getEnumValuesInList<eColor>("The color of the car is?");
 
-        private string k_NumberOfDoors =  UserInterfaceHandler.getEnumValuesInList<eNumberOfDoors>("Please enter the number of doors:");
+        private string k_NumberOfDoors = UserInterfaceHandler.getEnumValuesInList<eNumberOfDoors>("Please enter the number of doors:");
 
         private string k_BikeLicenseType = UserInterfaceHandler.getEnumValuesInList<eLisenceType>("What is the bike license type:");
 
         private string k_FuleType = UserInterfaceHandler.getEnumValuesInList<eFuelType>("What is the vehicle fuel type?");
 
-       
+
 
         public void openGarage()
         {
@@ -82,12 +82,12 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                 Console.WriteLine(k_Menu);
                 userInputInMenu = UserInterfaceHandler.getUserMenuSelection(1, 8);
 
-               switch (userInputInMenu)
-               {
+                switch (userInputInMenu)
+                {
                     case 1:
-                       enterNewVehicle();
-                       Console.WriteLine(k_VehicleCreated);
-                       System.Threading.Thread.Sleep(3000);
+                        enterNewVehicle();
+                        Console.WriteLine(k_VehicleCreated);
+                        System.Threading.Thread.Sleep(3000);
                         break;
                     case 2:
                         showList();
@@ -107,7 +107,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                     case 7:
                         seeVehicleDetails();
                         break;
-               }
+                }
             }
         }
 
@@ -115,7 +115,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
         {
             string licensePlate = getLicensePlate();
 
-            
+
             //if....
             // need to check if the vehicle exist in the garage(also in the other methods below).
 
@@ -251,13 +251,13 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
         private void createBike(bool i_isElectric)
         {
-            eLisenceType? typeOfLicense = null; 
+            eLisenceType? typeOfLicense = null;
             int engineDisplacement = 0;
             eFuelType? typeOfFuel = null;
 
             Console.WriteLine(k_BikeLicenseType);
             typeOfLicense = UserInterfaceHandler.getValidEnumValue<eLisenceType>();
-  
+
 
             Console.Out.WriteLine(k_EnterEngineDisplacement);
             engineDisplacement = UserInterfaceHandler.getUserInput<int>();
@@ -309,7 +309,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
             currentCurryLoad = UserInterfaceHandler.getUserInput<float>();
             Console.Clear();
         }
-        
+
 
         private static string getLicensePlate()
         {

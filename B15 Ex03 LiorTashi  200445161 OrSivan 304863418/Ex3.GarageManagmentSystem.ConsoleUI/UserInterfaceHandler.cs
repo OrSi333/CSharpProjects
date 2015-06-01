@@ -68,7 +68,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    Console.WriteLine("Please try again");                   
+                    Console.WriteLine("Please try again");
                     continue;
                 }
 
@@ -119,9 +119,9 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                     }
                     else
                         enumToReturn = (T)(object)inputNumber;
-                        Console.Clear();
-                        break;
-                    }
+                    Console.Clear();
+                    break;
+                }
                 else
                 {
                     try
