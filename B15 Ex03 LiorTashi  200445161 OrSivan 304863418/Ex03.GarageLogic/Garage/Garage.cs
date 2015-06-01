@@ -59,20 +59,19 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void addFuel(string i_VehicleNumber,eFuelType i_FuelType, float i_FuelToAdd)
-        {
-
-        }
-
-        public void charge(string i_VehicleNumber, float i_FuelToAdd)
-        {
-
-        }
-
         public string getAllDataOnVehicle(string i_VehicleNumber)
         {
 
             return null;
+        }
+
+        public void addFuelOrCharge(string licensePlate, eFuelType? fuelType, float quantityToRefulOrCharge)
+        {
+            // fuel vehicle
+            if (fuelType != null)
+            {
+                //TODO
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
@@ -8,19 +9,19 @@ namespace Ex03.GarageLogic
     {
         private string m_ownerName;
         private string m_ownerPhoneNumber;
-        private Garage.eVehicleState m_vehicleState;
+        private eVehicleStatus m_vehicleState;
         private Vehicle m_vehicle;
 
         internal VehicleDetails(string i_OwnerName, string i_OwnerPhoneNum, Vehicle i_Vehicle)
         {
             m_ownerName = i_OwnerName;
             m_ownerPhoneNumber = i_OwnerPhoneNum;
-            m_vehicleState = Garage.eVehicleState.Fixing;
+            m_vehicleState = eVehicleStatus.Fixed;
             m_vehicle = i_Vehicle;
             
         }
 
-        public Garage.eVehicleState VehicleState
+        public eVehicleStatus VehicleState
         {
             get
             {

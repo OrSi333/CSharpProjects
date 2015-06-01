@@ -7,9 +7,13 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 {
     internal static class UserInterfaceHandler
     {
+        private const int k_WaitTime = 2000;
+
         private const string k_ErrorEmptyInput = "The input you entered is empty. Please try again";
         private const string k_ErrorArgumentException = "Invalid argument or {0} was not found!";
         private const string k_ErrorFormatException = "The input you entered is not valid";
+        private const string k_ErrorInvalidInput = "Invalid input";
+        private const string k_ErrorInputOutOfRange = "Please pick a number between {0} - {1}";
 
         // Checks if the givin number is within the desired range;
         public static bool checkInputRange(int i_StartNumber, int i_EndNumber, int numberToCheck)
@@ -18,6 +22,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
             if (numberToCheck > i_EndNumber || numberToCheck < i_StartNumber)
             {
+                Console.WriteLine(string.Format(k_ErrorInputOutOfRange, i_StartNumber, i_EndNumber));
                 isValid = false;
             }
             return isValid;
@@ -63,10 +68,11 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
-                    Console.WriteLine("Please try again");
+                    Console.WriteLine("Please try again");                   
                     continue;
                 }
 
+                Console.Clear();
                 break;
             }
 
@@ -83,6 +89,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
                 if (!valueToReturn.Equals(string.Empty))
                 {
+                    Console.Clear();
                     break;
                 }
 
@@ -112,13 +119,15 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                     }
                     else
                         enumToReturn = (T)(object)inputNumber;
-                    break;
-                }
+                        Console.Clear();
+                        break;
+                    }
                 else
                 {
                     try
                     {
                         enumToReturn = (T)System.Enum.Parse(typeof(T), input, true);
+                        Console.Clear();
                         break;
                     }
                     catch (ArgumentException ae)
@@ -137,9 +146,11 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
         }
 
         // returns a numbered list of the values in given T.
-        public static string getEnumValuesInList<T>()
+        public static string getEnumValuesInList<T>(string i_EnterStr)
         {
             StringBuilder listOfValues = new StringBuilder();
+            listOfValues.AppendLine(i_EnterStr);
+
             int i = 0;
 
             foreach (Enum value in Enum.GetValues(typeof(T)))
@@ -148,6 +159,31 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
             }
 
             return listOfValues.ToString();
+        }
+
+        public static int getUserMenuSelection(int i_StartMenuValue, int i_EndMenuValue)
+        {
+            int userInputInMenu = 0;
+
+            while (true)
+            {
+                try
+                {
+                    userInputInMenu = int.Parse(Console.ReadLine());
+
+                    if (checkInputRange(i_StartMenuValue, i_EndMenuValue, userInputInMenu))
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.Out.WriteLine(k_ErrorInvalidInput);
+                }
+            }
+
+            return userInputInMenu;
         }
     }
 }

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic.Enums;
 using Ex03.GarageLogic.Models;
+using Ex03.GarageLogic;
 
 namespace Ex3.GarageManagmentSystem.ConsoleUI
 {
     public class UserInterface
     {
+        Garage m_Garage = new Garage();
+
         private const string k_WelcomeMsg = "************Welcome to The Garage!************";
         private const string k_EnterModelName = "Enter the model name of the vehicle:";
         private const string k_EnterLicensePlate = "Enter the license plate of the vehicle:";
@@ -22,28 +25,26 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
         private const string k_EnterCurrentFuelQuantity = "Enter the current quantity of fuel.";
         private const string k_EnterCurrentAirPressure = "Enter the current air pressure of the wheels.";
         private const string k_EnterTheDesiredQuantityToReful = "Enter the desired quantity of fuel you would like to refule or the amount of time(in minutes) you would like to charge the battery with (for example '100')";
-        private const string k_ErrorInvalidInput = "Invalid input";
         private const string k_ErrorOufOfBound = "invalid input, the value you entered is {0} but the maximum is {1}, please try again";
+        private const string k_VehicleCreated = "Vehicle was created!";
 
         private const string k_EnterMaxQuantityOfEnergy = 
 @"Enter the car's maximum energy quantity: 
 (if its a fuel engine enter the maximum quantity of the fuel tank and if its an electric engine enter the battery maximum capacity)";
 
         private const string k_Menu =
-@"please enter your desired operation: 
+@"Please enter your desired operation: 
 1. Enter a new vehicle to the garage.
 2. Show the list of the license plates of the vehicles that are in the garage.
 3. Change the state of a vehicle in the garage.
 4. Inflate vehicle wheels.
 5. Refule vehicle.
 6. Charge an electirc engine.
-7. Enter a vehicle license plate to see his details.";
+7. Enter a vehicle license plate to see his details.
+8. Exit";
 
-        private const string k_EnterVehicleStatus = string.Format(
-@"Choose status:
-{0}
-4. All",
-    UserInterfaceHandler.getEnumValuesInList<eVehicleStatus>());
+
+        private string k_EnterVehicleStatus = UserInterfaceHandler.getEnumValuesInList<eVehicleStatus>("Choose status:");
 
         private const string k_KindOfVehicle =
 
@@ -51,63 +52,62 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 @"What type of vehicle?
 1. Bike.
 2. Electric Bike.
-1. Car.
-2. Electric Car
-3. Truck.";
+3. Car.
+4. Electric Car
+5. Truck.";
 
-        private const string k_CarryToxic =
+        private string k_CarryToxic =
 @"Does the truck carry toxic cargo? 
 1. Yes.
 2. No.";
 
-        private const string k_ColorOfCar = string.Format(
-@"The color of the car is?
-{0}",
-    UserInterfaceHandler.getEnumValuesInList<eNumberOfDoors>());
+        private string k_ColorOfCar = UserInterfaceHandler.getEnumValuesInList<eColor>("The color of the car is?");
 
-        private const string k_NumberOfDoors = string.Format(
-@"Please enter the number of doors:
-{0}",
-    UserInterfaceHandler.getEnumValuesInList<eNumberOfDoors>());
+        private string k_NumberOfDoors =  UserInterfaceHandler.getEnumValuesInList<eNumberOfDoors>("Please enter the number of doors:");
 
-        private const string k_BikeLicenseType = string.Format(
-@"What is the bike license type: 
-{0}",
-    UserInterfaceHandler.getEnumValuesInList<eLisenceType>());
+        private string k_BikeLicenseType = UserInterfaceHandler.getEnumValuesInList<eLisenceType>("What is the bike license type:");
 
-        private const string k_FuleType = string.Format(
-@"What is the vehicle fuel type? 
-{0}", 
-    UserInterfaceHandler.getEnumValuesInList<eFuelType>());
+        private string k_FuleType = UserInterfaceHandler.getEnumValuesInList<eFuelType>("What is the vehicle fuel type?");
+
+       
 
         public void openGarage()
         {
-            Console.Out.WriteLine(k_WelcomeMsg);
-            int userInputInMenu = getUserMenuSelection(1, 7);
+            int userInputInMenu = 0;
 
-            switch (userInputInMenu)
+            while (userInputInMenu != 8)
             {
-                case 1:
-                    enterNewVehicle();
-                    break;
-                case 2:
-                    showList();
-                    break;
-                case 3:
-                    changeStateOfVehicle();
-                    break;
-                case 4:
-                    inflateWheels();
-                    break;
-                case 5:
-                    refuleVehicle(false);
-                    break;
-                case 6:
-                    refuleVehicle(true);
-                    break;
-                case 7:
-                    seeVehicleDetails();
-                    break;
+                Console.Clear();
+                Console.Out.WriteLine(k_WelcomeMsg);
+                Console.WriteLine(k_Menu);
+                userInputInMenu = UserInterfaceHandler.getUserMenuSelection(1, 8);
+
+               switch (userInputInMenu)
+               {
+                    case 1:
+                       enterNewVehicle();
+                       Console.WriteLine(k_VehicleCreated);
+                       System.Threading.Thread.Sleep(3000);
+                        break;
+                    case 2:
+                        showList();
+                        break;
+                    case 3:
+                        changeStateOfVehicle();
+                        break;
+                    case 4:
+                        inflateWheels();
+                        break;
+                    case 5:
+                        refuleVehicle(false);
+                        break;
+                    case 6:
+                        refuleVehicle(true);
+                        break;
+                    case 7:
+                        seeVehicleDetails();
+                        break;
+               }
             }
         }
 
@@ -115,6 +115,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
         {
             string licensePlate = getLicensePlate();
 
+            
             //if....
             // need to check if the vehicle exist in the garage(also in the other methods below).
 
@@ -124,42 +125,40 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
             // should call the getVehicleFromGarage() and set its status to the desired state above.
         }
 
-        private static string getLicensePlate()
-        {
-            Console.WriteLine(k_EnterLicensePlate);
-            string licensePlate = UserInterfaceHandler.getUserInput<string>();
-
-            return licensePlate;
-        }
 
         private void seeVehicleDetails()
         {
             string licensePlate = getLicensePlate();
 
-            // need to call here the getVehicleFromGarage method from garage logic.
+            Console.WriteLine(m_Garage.getAllDataOnVehicle(licensePlate));
         }
 
         private void refuleVehicle(bool isElectric)
         {
             string licensePlate = getLicensePlate();
+            eFuelType? fuelType = null;
+            float quantityToRefulOrCharge = 0F;
 
             if (!isElectric)
             {
-            Console.WriteLine(k_FuleType);
-            eFuelType fuelType = UserInterfaceHandler.getUserInput<eFuelType>();
+                Console.WriteLine(k_FuleType);
+                fuelType = UserInterfaceHandler.getUserInput<eFuelType>();
+                Console.Clear();
             }
 
             Console.WriteLine(k_EnterTheDesiredQuantityToReful);
-            float quantityToRefulOrCharge = UserInterfaceHandler.getUserInput<float>();
+            quantityToRefulOrCharge = UserInterfaceHandler.getUserInput<float>();
 
-            // should i create a new vehicle ? or just call the service?
+            m_Garage.addFuelOrCharge(licensePlate, fuelType, quantityToRefulOrCharge);
         }
 
         private void inflateWheels()
         {
             string licensePlate = getLicensePlate();
 
-            // need to call here the getVehicleFromGarage method from garage logic.
+            m_Garage.inflateWheelsToMax(licensePlate);
+
+            // should i print something ? 
         }
 
         private void showList()
@@ -169,10 +168,11 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
         private void enterNewVehicle()
         {
+            Console.Clear();
             creatNewVehicle();
             Console.Out.WriteLine(k_KindOfVehicle);
             // THIS SHOULD BE CHANGE, IF WE'LL SUPPORT A NEW VEHICLE TYPE THE SWITCH WILL FAIL HERE.
-            int userInput = getUserMenuSelection(1, 5);
+            int userInput = UserInterfaceHandler.getUserMenuSelection(1, 5);
 
             switch (userInput)
             {
@@ -197,12 +197,16 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
         private void creatNewVehicle()
         {
             string licensePlate = getLicensePlate();
+            string modelName = string.Empty;
+            float maxAirPressure = 0;
+            float maxQuantityOFfuel = 0;
+            string wheelManufucture = string.Empty;
 
             Console.WriteLine(k_EnterModelName);
-            string modelName = UserInterfaceHandler.getUserInput<string>();
+            modelName = UserInterfaceHandler.getUserInput<string>();
 
             Console.WriteLine(k_EnterMaximumAirPressure);
-            float maxAirPressure = UserInterfaceHandler.getUserInput<float>();
+            maxAirPressure = UserInterfaceHandler.getUserInput<float>();
 
             Console.WriteLine(k_EnterCurrentAirPressure);
 
@@ -216,11 +220,13 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                     continue;
                 }
 
+                Console.Clear();
                 break;
             }
 
             Console.WriteLine(k_EnterMaxQuantityOfEnergy);
-            float maxQuantityOFfuel = UserInterfaceHandler.getUserInput<float>();
+            maxQuantityOFfuel = UserInterfaceHandler.getUserInput<float>();
+            Console.Clear();
 
             Console.WriteLine(k_EnterEnergyLeft);
 
@@ -234,27 +240,32 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                     continue;
                 }
 
+                Console.Clear();
                 break;
             }
 
             Console.WriteLine(k_EnterWheelManifucture);
-            string wheelManufucture = UserInterfaceHandler.getUserInput<string>();
+            wheelManufucture = UserInterfaceHandler.getUserInput<string>();
+            Console.Clear();
         }
 
         private void createBike(bool i_isElectric)
         {
-            Console.Out.WriteLine(k_BikeLicenseType);
+            eLisenceType? typeOfLicense = null; 
+            int engineDisplacement = 0;
+            eFuelType? typeOfFuel = null;
 
             Console.WriteLine(k_BikeLicenseType);
-            eLisenceType typeOfLicense = UserInterfaceHandler.getValidEnumValue<eLisenceType>();
+            typeOfLicense = UserInterfaceHandler.getValidEnumValue<eLisenceType>();
+  
 
             Console.Out.WriteLine(k_EnterEngineDisplacement);
-            int engineDisplacement = UserInterfaceHandler.getUserInput<int>();
+            engineDisplacement = UserInterfaceHandler.getUserInput<int>();
 
             if (!i_isElectric)
             {
                 Console.WriteLine(k_FuleType);
-                eFuelType typeOfFuel = UserInterfaceHandler.getUserInput<eFuelType>();
+                typeOfFuel = UserInterfaceHandler.getUserInput<eFuelType>();
             }
             else
             {
@@ -264,16 +275,20 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
         private void createCar(bool isElectric)
         {
+            eColor? colorOfCar = null;
+            eNumberOfDoors? numberOfDoors = null;
+            eFuelType? typeOfFuel = null;
+
             Console.WriteLine(k_ColorOfCar);
-            eColor colorOfCar = UserInterfaceHandler.getUserInput<eColor>();
+            colorOfCar = UserInterfaceHandler.getUserInput<eColor>();
 
             Console.WriteLine(k_NumberOfDoors);
-            eNumberOfDoors numberOfDoors = UserInterfaceHandler.getUserInput<eNumberOfDoors>();
+            numberOfDoors = UserInterfaceHandler.getUserInput<eNumberOfDoors>();
 
             if (!isElectric)
             {
                 Console.WriteLine(k_FuleType);
-                eFuelType typeOfFuel = UserInterfaceHandler.getUserInput<eFuelType>();
+                typeOfFuel = UserInterfaceHandler.getUserInput<eFuelType>();
             }
             else
             {
@@ -283,34 +298,26 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
         private void createTruck()
         {
+            int carryToxic = 0;
+            float currentCurryLoad = 0;
+
             Console.WriteLine(k_CarryToxic);
-            int carryToxic = UserInterfaceHandler.getUserInput<int>();
+            carryToxic = UserInterfaceHandler.getUserInput<int>();
+            Console.Clear();
 
             Console.WriteLine(k_EnterCurrentCurryLoad);
-            float currentCurryLoad = UserInterfaceHandler.getUserInput<float>();
+            currentCurryLoad = UserInterfaceHandler.getUserInput<float>();
+            Console.Clear();
         }
         
-        // Should move it to userInterfaceHandler!!!
-        private static int getUserMenuSelection(int i_StartMenuValue, int i_EndMenuValue)
+
+        private static string getLicensePlate()
         {
-            int userInputInMenu = 0;
+            Console.WriteLine(k_EnterLicensePlate);
+            string licensePlate = UserInterfaceHandler.getUserInput<string>();
+            Console.Clear();
 
-            while (true) 
-            {
-                try 
-                { 
-                    if (int.TryParse(Console.ReadLine(), out userInputInMenu) && UserInterfaceHandler.checkInputRange(i_StartMenuValue, i_EndMenuValue, userInputInMenu))
-                    {
-                       break;
-                    }
-                }
-                catch (FormatException)
-                {
-                    Console.Out.WriteLine(k_ErrorInvalidInput);
-                }
-            }
-
-            return userInputInMenu;
+            return licensePlate;
         }
     }
 }
