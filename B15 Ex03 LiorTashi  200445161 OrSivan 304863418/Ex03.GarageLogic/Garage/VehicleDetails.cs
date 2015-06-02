@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Ex03.GarageLogic.Vehicles;
 
 namespace Ex03.GarageLogic
 {
@@ -33,7 +33,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        internal Vehicle Vehicle
+        public Vehicle Vehicle
         {
             get
             {

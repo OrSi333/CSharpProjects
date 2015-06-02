@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic.VehicleComponents
             
         }
 
-        internal void chargePower(float i_HoursToAdd)
+        public void chargePower(float i_HoursToAdd)
         {
             if (m_CurrentQuantity + i_HoursToAdd > m_MaxCapacity)
             {

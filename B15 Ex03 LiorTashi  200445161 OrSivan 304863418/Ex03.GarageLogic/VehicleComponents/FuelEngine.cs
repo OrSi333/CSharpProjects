@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic.VehicleComponents
         }
 
 
-        internal void addFuel(float i_FuelToAdd, eFuelType i_FuelType)
+        public void addFuel(float i_FuelToAdd, eFuelType i_FuelType)
         {
             if (!(i_FuelType == m_fuelType))
             {

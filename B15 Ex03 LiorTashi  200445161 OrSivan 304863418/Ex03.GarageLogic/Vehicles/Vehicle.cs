@@ -47,7 +47,7 @@ namespace Ex03.GarageLogic.Vehicles
             }
         }
 
-        internal void InflateAllWheelsToMax()
+        public void InflateAllWheelsToMax()
         {
             foreach (Wheel wheel in m_WheelSet)
             {
@@ -55,6 +55,14 @@ namespace Ex03.GarageLogic.Vehicles
                 {
                     wheel.InflateWheel(wheel.AirToFill);
                 }
+            }
+        }
+
+        public Engine VehicleEngine
+        {
+            get
+            {
+                return m_Engine;
             }
         }
 

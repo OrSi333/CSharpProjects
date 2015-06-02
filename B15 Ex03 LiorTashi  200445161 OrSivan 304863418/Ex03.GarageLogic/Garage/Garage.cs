@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ex03.GarageLogic.Enums;
+using Ex03.GarageLogic.VehicleComponents;
 
 namespace Ex03.GarageLogic
 {
@@ -26,10 +27,29 @@ namespace Ex03.GarageLogic
             }
         }
 
-        //TODO:
         public string getAllLisenceNumbers()
         {
-            return null;
+            string allNumbers;
+            foreach (string currNum in m_vehiclesInGarage.Keys)
+            {
+                allNumbers += string.Format("{0}{1}", currNum, Environment.NewLine);
+            }
+            return allNumbers;
+        }
+
+        public string getAllLisenceNumbers(eVehicleStatus i_Status)
+        {
+            string allNumbers;
+            foreach (string currNum in m_vehiclesInGarage.Keys)
+            {
+                VehicleDetails details;
+                m_vehiclesInGarage.TryGetValue(currNum, out details);
+                if (details.VehicleState == i_Status)
+                {
+                    allNumbers += string.Format("{0}{1}", currNum, Environment.NewLine);
+                }
+            }
+            return allNumbers;
         }
 
         public void changeVehicleState(string i_LicenseNum, eVehicleStatus i_State)
@@ -45,13 +65,12 @@ namespace Ex03.GarageLogic
             }
         }
 
-        //TODO:
         public void inflateWheelsToMax(string i_LicenseNum)
         {
-            
-            if (m_vehiclesInGarage.ContainsKey(i_LicenseNum))
+            VehicleDetails details;
+            if (m_vehiclesInGarage.TryGetValue(i_LicenseNum, out details))
             {
-                
+                details.Vehicle.InflateAllWheelsToMax();
             }
             else
             {
@@ -59,27 +78,37 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public string getAllDataOnVehicle(string i_VehicleNumber)
+        public void addFuelOrCharge(string licensePlate, eFuelType? i_FuelType, float i_QuantityToRefulOrCharge)
         {
-
-            return null;
-        }
-
-        public void addFuelOrCharge(string licensePlate, eFuelType? fuelType, float quantityToRefulOrCharge)
-        {
-            // fuel vehicle
-            if (fuelType != null)
+            VehicleDetails details;
+            if (m_vehiclesInGarage.TryGetValue(i_LicenseNum, out details))
             {
-                //TODO
-                VehicleDetails details = null;
-                if (m_vehiclesInGarage.TryGetValue(licensePlate, out details))
+                if (i_FuelType == null)//Charge
                 {
-
+                    if (details.Vehicle.VehicleEngine is ElectricEngine)
+                    {
+                        ((ElectricEngine)details.Vehicle.VehicleEngine).chargePower(i_QuantityToRefulOrCharge);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("You can't charge electricity a fuel engine", details.Vehicle);
+                    }
                 }
-                else
+                else //Refuel
                 {
-                    throw new ArgumentException(vehicleNotFound, licensePlate);
+                    if (details.Vehicle.VehicleEngine is FuelEngine)
+                    {
+                        ((FuelEngine)details.Vehicle.VehicleEngine).addFuel(i_QuantityToRefulOrCharge,i_FuelType);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("You can't put fuel in an electric engine", details.Vehicle);
+                    }
                 }
+            }
+            else
+            {
+                throw new ArgumentException(vehicleNotFound, i_LicenseNum);
             }
         }
 
