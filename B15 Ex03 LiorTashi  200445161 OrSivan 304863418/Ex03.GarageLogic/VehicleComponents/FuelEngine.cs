@@ -38,22 +38,6 @@ namespace Ex03.GarageLogic.VehicleComponents
             }
         }
 
-        internal float CurrentAmmountOfFuel
-        {
-            get
-            {
-                return m_CurrentQuantity;
-            }
-        }
-
-        internal float MaxFuelCapacity
-        {
-            get
-            {
-                return m_MaxCapacity;
-            }
-        }
-
         public override string ToString()
         {
             return string.Format("Fuel left: {0} liters{1}Fuel Capacity: {2} liters{3}Fuel type {4}{5}", 

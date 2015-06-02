@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic.VehicleComponents;
 
-namespace Ex03.GarageLogic
+namespace Ex03.GarageLogic.Vehicles
 {
     abstract public class Vehicle
     {
@@ -12,6 +12,7 @@ namespace Ex03.GarageLogic
         protected float m_EnergyLeft;
         protected Wheel[] m_WheelSet;
         protected Engine m_Engine;
+        protected List<ParamHolder> m_UniqParams;
         
 
         protected Vehicle(Models.VehicleModel i_Model)
@@ -26,7 +27,25 @@ namespace Ex03.GarageLogic
 
         }
 
-        
+        public List<ParamHolder> UniqParams
+        {
+            get
+            {
+                m_UniqParams;
+            }
+        }
+
+        //Init the variables in the same order as they were added to the list
+        public virtual void ImplementUniqParams()
+        {
+            foreach (ParamHolder parameter in m_UniqParams)
+            {
+                if (parameter.Value == null)
+                {
+                    throw ArgumentNullException(string.Format("{0} was not initialized",parameter.ToString()), parameter);
+                }
+            }
+        }
 
         internal void InflateAllWheelsToMax()
         {

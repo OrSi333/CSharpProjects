@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Ex03.GarageLogic.Enums;
 
-namespace Ex03.GarageLogic
+namespace Ex03.GarageLogic.Vehicles
 {
     class Car : Vehicle
     {
-        private Enums.eColor m_carColor;
-        private Enums.eNumberOfDoors m_numOfDoors;
+        private eColor m_carColor;
+        private eNumberOfDoors m_numOfDoors;
 
-        internal Car(Models.CarModel i_Model):
+        internal Car(Models.VehicleModel i_Model):
             base(i_Model)
         {
-            m_carColor = i_Model.m_carColor;
-            m_numOfDoors = i_Model.m_numOfDoors;
+            m_UniqParams = new List<ParamHolder>();
+            m_UniqParams.Add(new ParamHolder("Car Color", typeof(eColor)));
+            m_UniqParams.Add(new ParamHolder("Number of doors", typeof(eNumberOfDoors)));
+
+        }
+
+        public override void ImplementUniqParams()
+        {
+            base.ImplementUniqParams();
+            m_carColor = (eColor)m_UniqParams[0];
+            m_numOfDoors = (eNumberOfDoors)m_UniqParams[1];
         }
         
         public override string ToString()

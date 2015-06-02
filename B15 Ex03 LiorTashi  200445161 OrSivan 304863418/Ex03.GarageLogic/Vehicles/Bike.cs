@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic.Enums;
 
-namespace Ex03.GarageLogic
+namespace Ex03.GarageLogic.Vehicles
 {
     //TODO: Make the class
     internal class Bike : Vehicle
@@ -11,13 +11,21 @@ namespace Ex03.GarageLogic
         private eLisenceType m_licenseType;
         private int m_motorVolume;
 
-        internal Bike(Models.BikeModel i_Model) :
+        internal Bike(Models.VehicleModel i_Model) :
             base(i_Model)
         {
-            m_licenseType = i_Model.m_licenseType;
-            m_motorVolume = i_Model.m_motorVolume;
+            m_UniqParams = new List<ParamHolder>();
+            uniqParams.Add(new ParamHolder("Lisence Type", typeof(eLisenceType)));
+            uniqParams.Add(new ParamHolder("Motor Volume", typeof(int)));
         }
 
+
+        public override void ImplementUniqParams()
+        {
+            base.ImplementUniqParams();
+            m_licenseType = (eLisenceType)m_UniqParams[0].Value;
+            m_motorVolume = (int)m_UniqParams[1].Value;
+        }
 
         public override string ToString()
         {

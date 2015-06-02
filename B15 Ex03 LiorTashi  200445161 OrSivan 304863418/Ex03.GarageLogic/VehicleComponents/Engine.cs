@@ -9,17 +9,23 @@ namespace Ex03.GarageLogic.VehicleComponents
         protected float m_CurrentQuantity;
         protected float m_MaxCapacity;
 
-        //TODO: delete this
-        internal Engine(float i_MaxCapacity)
-        {
-            m_MaxCapacity = i_MaxCapacity;
-            m_CurrentQuantity = m_MaxCapacity;
-        }
-
-        internal Engine(float i_MaxCapacity, float i_CurrentQuantity)
+        public Engine(float i_MaxCapacity, float i_CurrentQuantity)
         {
             m_MaxCapacity = i_MaxCapacity;
             m_CurrentQuantity = i_CurrentQuantity;
+        }
+
+        public float EnergyLeft
+        {
+            get
+            {
+                return 100f*m_CurrentQuantity / m_MaxCapacity;
+            }
+        }
+
+        public float MaxCapacity
+        {
+            get { return m_MaxCapacity; }
         }
 
         protected void addQuantity(float i_Quantity)

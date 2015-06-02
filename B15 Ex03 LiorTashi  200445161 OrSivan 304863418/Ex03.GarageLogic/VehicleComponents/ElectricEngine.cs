@@ -12,22 +12,6 @@ namespace Ex03.GarageLogic.VehicleComponents
         {
             
         }
-        
-        internal float RemainingPowerTime
-        {
-            get
-            {
-                return m_CurrentQuantity;
-            }
-        }
-
-        internal float MaxPowerTime
-        {
-            get
-            {
-                return m_MaxCapacity;
-            }
-        }
 
         internal void chargePower(float i_HoursToAdd)
         {
