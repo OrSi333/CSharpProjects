@@ -7,31 +7,40 @@ namespace Ex03.GarageLogic.Vehicles
 {
     abstract public class Vehicle
     {
-        private string m_modelName;
         private string m_licenseNumber;
+        private string m_modelName;
         protected float m_EnergyLeft;
         protected Wheel[] m_WheelSet;
         protected Engine m_Engine;
+        protected int m_numberOfBaseParams = 0;
+        protected int m_initParamCounter = 0;
         protected List<ParamHolder> m_UniqParams;
-        
 
-        protected Vehicle(Models.VehicleModel i_Model)
+        public static readonly string s_LicenseNumberMsg = "License number";
+        public static readonly string s_ModelNameMsg = "Model name";
+        public static readonly string s_NumOfWheelMsg = "Number of wheels";
+        public static readonly string s_WheelMakerName = "Wheel maker name";
+        public static readonly string s_WheelMaxAirPressureMsg = "Wheel max air pressure";
+        public static readonly string s_EngineCapacityMsg = "Engine Max Capacity";
+        public static readonly string s_EngineQuantityMsg = "Engine Current Quantity";
+
+        protected Vehicle()
         {
-            m_licenseNumber = i_Model.m_licenseNumber;
-            m_modelName = i_Model.m_modelName;
-            m_WheelSet = new Wheel[i_Model.m_NumOfWheels];
-            for (int i = 0; i < m_WheelSet.Length; i++)
-            {
-                m_WheelSet[i] = new Wheel(i_Model.m_WheelMakerName, i_Model.m_WheelMaxAirPressure);
-            }
-
+            m_UniqParams = new List<ParamHolder>();
+            m_UniqParams.Add(new ParamHolder(s_LicenseNumberMsg, typeof(string))); m_numberOfBaseParams++;
+            m_UniqParams.Add(new ParamHolder(s_ModelNameMsg, typeof(string))); m_numberOfBaseParams++;
+            m_UniqParams.Add(new ParamHolder(s_NumOfWheelMsg, typeof(int))); m_numberOfBaseParams++;
+            m_UniqParams.Add(new ParamHolder(s_WheelMakerName, typeof(string))); m_numberOfBaseParams++;
+            m_UniqParams.Add(new ParamHolder(s_WheelMaxAirPressureMsg, typeof(float))); m_numberOfBaseParams++;
+            m_UniqParams.Add(new ParamHolder(s_EngineCapacityMsg, typeof(float)));
+            m_UniqParams.Add(new ParamHolder(s_EngineQuantityMsg, typeof(float)));
         }
 
         public List<ParamHolder> UniqParams
         {
             get
             {
-                m_UniqParams;
+                return m_UniqParams;
             }
         }
 
@@ -42,9 +51,24 @@ namespace Ex03.GarageLogic.Vehicles
             {
                 if (parameter.Value == null)
                 {
-                    throw ArgumentNullException(string.Format("{0} was not initialized",parameter.ToString()), parameter);
+                    throw new ArgumentNullException(string.Format("{0} was not initialized",parameter.ToString()), parameter.Value.ToString());
                 }
             }
+
+            m_licenseNumber = (string)(m_UniqParams[m_initParamCounter].Value); m_initParamCounter++;
+            m_modelName = (string)(m_UniqParams[m_initParamCounter].Value); m_initParamCounter++;
+            int numOfWheels = (int)(m_UniqParams[m_initParamCounter].Value); m_initParamCounter++;
+            string wheelMakerName = (string)(m_UniqParams[m_initParamCounter].Value); m_initParamCounter++;
+            float wheelMaxAirPressure = (float)(m_UniqParams[m_initParamCounter].Value); m_initParamCounter++;
+            m_WheelSet = new Wheel[numOfWheels];
+
+            for (int i = 0; i < m_WheelSet.Length; i++)
+            {
+                m_WheelSet[i] = new Wheel(wheelMakerName, wheelMaxAirPressure);
+            }
+
+            m_Engine.MaxCapacity = (float)(m_UniqParams[m_initParamCounter].Value); m_initParamCounter++;
+            m_Engine.CurrentQuantity = (float)(m_UniqParams[m_initParamCounter].Value); m_initParamCounter++;
         }
 
         public void InflateAllWheelsToMax()
@@ -64,6 +88,12 @@ namespace Ex03.GarageLogic.Vehicles
             {
                 return m_Engine;
             }
+            set { m_Engine = value; }
+        }
+
+        public string LicenseNumber
+        {
+            get { return m_licenseNumber; }
         }
 
         //We are overriding the toString method in order to present the vehicle's information.

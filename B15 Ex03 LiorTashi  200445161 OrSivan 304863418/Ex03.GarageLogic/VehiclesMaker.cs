@@ -2,45 +2,36 @@
 using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic.Enums;
-using Ex03.GarageLogic.Models;
 using Ex03.GarageLogic.Vehicles;
+using Ex03.GarageLogic.VehicleComponents;
 
 namespace Ex03.GarageLogic
 {
     public class VehiclesMaker
     {
-
-        public Vehicle makeVehicle(SupportedVehicle i_VehicleToCreate,VehicleModel i_Model)
+        ParamHolder currentParamHolder;
+        public void makeVehicle(SupportedVehicle i_VehicleToCreate, out Vehicle o_CreatedVehicle)
         {
             switch (i_VehicleToCreate)
             {
-                case SupportedVehicle.ElectricCar: return makeElectricCar(i_Model);
-                
+                case SupportedVehicle.ElectricCar: 
+                    makeElectricCar(out o_CreatedVehicle); 
+                    break;
+                default: o_CreatedVehicle = null;
+                    throw new ArgumentException("The garage doesn't support this kind of vehicle yes", i_VehicleToCreate.ToString());
             }
         }
 
-        private Vehicle makeElectricCar(VehicleModel i_Model)
+        private void makeElectricCar(out Vehicle o_CreatedVehicle)
         {
-            checkModelParameter(i_Model.NumberOfWheels, 4, "number of wheels", "electric car");
-            checkModelParameter(i_Model.WheelMaxPressure, 31, "wheel max air pressure", "electric car");
-            checkModelParameter(i_Model.VehicleEngine.MaxCapacity, 2.2f, "hours charge capacity", "electric car");
-            return new Car(i_Model);
-
-        }
-
-        private void checkModelParameter(object i_ModelParam, object i_TestParam, string i_ParamName, string i_VehicleName)
-        {
-            if (i_ModelParam.GetType() == i_TestParam.GetType())
-            {
-                if (!i_ModelParam.Equals(i_TestParam))
-                {
-                    throw new ArgumentException(string.Format("Supported {0} must have {1} {2}", i_VehicleName, i_TestParam, i_ParamName), i_ModelParam);
-                }
-            }
-            else
-            {
-                throw new ArgumentException(string.Format("Tester parameter not is not type {0}", i_TestParam.GetType().ToString()), i_ModelParam);
-            }
+            o_CreatedVehicle = new Car();
+            o_CreatedVehicle.VehicleEngine = new ElectricEngine();
+            currentParamHolder = o_CreatedVehicle.UniqParams.Find(item => item.Equals(Vehicle.s_EngineCapacityMsg));
+            currentParamHolder.Value = 2.2f;
+            currentParamHolder = o_CreatedVehicle.UniqParams.Find(item => item.Equals(Vehicle.s_NumOfWheelMsg));
+            currentParamHolder.Value = 4;
+            currentParamHolder = o_CreatedVehicle.UniqParams.Find(item => item.Equals(Vehicle.s_WheelMaxAirPressureMsg));
+            currentParamHolder.Value = 31.0f;
         }
 
         public enum SupportedVehicle

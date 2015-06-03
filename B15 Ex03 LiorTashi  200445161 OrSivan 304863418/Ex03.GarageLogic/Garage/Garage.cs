@@ -9,27 +9,30 @@ namespace Ex03.GarageLogic
     {
         private Dictionary<string, VehicleDetails> m_vehiclesInGarage;
         private const string vehicleNotFound = "The vehicle doesn't exsist in the garage!";
-        private VehiclesMaker vehicleMaker;
+        
+        public Garage (){
+            m_vehiclesInGarage = new Dictionary<string, VehicleDetails>();
+         }
 
-        public void addVehicleToGarage(Models.VehicleModel i_Model, string i_OwnerName, string i_OwnerPhoneNum)
+        public void addVehicleToGarage(Vehicles.Vehicle i_Vehicle, string i_OwnerName, string i_OwnerPhoneNum)
         {
             VehicleDetails vehicleDetails;
-            if (m_vehiclesInGarage.TryGetValue(i_Model.m_licenseNumber, out vehicleDetails))
+            if (m_vehiclesInGarage.TryGetValue(i_Vehicle.LicenseNumber, out vehicleDetails))
             {
                 vehicleDetails.VehicleState = eVehicleStatus.Fixed;
                 string errorMgs = string.Format("Vehicle alredy exsist in the garage!{0}This operation will cause the vehicle to move back to {1} state",
                     Environment.NewLine, eVehicleStatus.Fixed);
-                throw new ArgumentException(errorMgs, i_Model.m_licenseNumber);
+                throw new ArgumentException(errorMgs, i_Vehicle.LicenseNumber);
             }
             else
             {
-                m_vehiclesInGarage.Add(i_Model.m_licenseNumber, new VehicleDetails(i_OwnerName, i_OwnerPhoneNum,vehicleMaker.makeVehicle(i_Model)));
+                m_vehiclesInGarage.Add(i_Vehicle.LicenseNumber, new VehicleDetails(i_OwnerName, i_OwnerPhoneNum,i_Vehicle));
             }
         }
 
         public string getAllLisenceNumbers()
         {
-            string allNumbers;
+            string allNumbers = string.Empty;
             foreach (string currNum in m_vehiclesInGarage.Keys)
             {
                 allNumbers += string.Format("{0}{1}", currNum, Environment.NewLine);
@@ -39,7 +42,7 @@ namespace Ex03.GarageLogic
 
         public string getAllLisenceNumbers(eVehicleStatus i_Status)
         {
-            string allNumbers;
+            string allNumbers = string.Empty;
             foreach (string currNum in m_vehiclesInGarage.Keys)
             {
                 VehicleDetails details;
@@ -78,7 +81,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void addFuelOrCharge(string licensePlate, eFuelType? i_FuelType, float i_QuantityToRefulOrCharge)
+        public void addFuelOrCharge(string i_LicenseNum, eFuelType? i_FuelType, float i_QuantityToRefulOrCharge)
         {
             VehicleDetails details;
             if (m_vehiclesInGarage.TryGetValue(i_LicenseNum, out details))
@@ -87,22 +90,29 @@ namespace Ex03.GarageLogic
                 {
                     if (details.Vehicle.VehicleEngine is ElectricEngine)
                     {
-                        ((ElectricEngine)details.Vehicle.VehicleEngine).chargePower(i_QuantityToRefulOrCharge);
+                        try
+                        {
+                            ((ElectricEngine)details.Vehicle.VehicleEngine).chargePower(i_QuantityToRefulOrCharge);
+                        }
+                        catch (ValueOutOfRangeException vore)
+                        {
+                            Console.WriteLine(vore.Message);
+                        }
                     }
                     else
                     {
-                        throw new ArgumentException("You can't charge electricity a fuel engine", details.Vehicle);
+                        throw new ArgumentException("You can't charge electricity a fuel engine", details.Vehicle.VehicleEngine.GetType().ToString());
                     }
                 }
                 else //Refuel
                 {
                     if (details.Vehicle.VehicleEngine is FuelEngine)
                     {
-                        ((FuelEngine)details.Vehicle.VehicleEngine).addFuel(i_QuantityToRefulOrCharge,i_FuelType);
+                        ((FuelEngine)details.Vehicle.VehicleEngine).addFuel(i_QuantityToRefulOrCharge,i_FuelType.Value);
                     }
                     else
                     {
-                        throw new ArgumentException("You can't put fuel in an electric engine", details.Vehicle);
+                        throw new ArgumentException("You can't put fuel in an electric engine", details.Vehicle.VehicleEngine.GetType().ToString());
                     }
                 }
             }

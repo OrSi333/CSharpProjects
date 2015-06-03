@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Ex03.GarageLogic.Vehicles;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
@@ -8,19 +9,19 @@ namespace Ex03.GarageLogic
     {
         private string m_ownerName;
         private string m_ownerPhoneNumber;
-        private eVehicleState m_vehicleState;
+        private eVehicleStatus m_vehicleState;
         private Vehicle m_vehicle;
 
         internal VehicleDetails(string i_OwnerName, string i_OwnerPhoneNum, Vehicle i_Vehicle)
         {
             m_ownerName = i_OwnerName;
             m_ownerPhoneNumber = i_OwnerPhoneNum;
-            m_vehicleState = Garage.eVehicleState.Fixing;
+            m_vehicleState = eVehicleStatus.Repairing;
             m_vehicle = i_Vehicle;
             
         }
 
-        public Garage.eVehicleState VehicleState
+        public eVehicleStatus VehicleState
         {
             get
             {
@@ -43,7 +44,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Owner's Name: {0}{1},Owner's Phone Number: {2}{3}Vehical's state: {4}{5}Vehicle:{6}{7}{8}"
+            return string.Format("Owner's Name: {0}{1}Owner's Phone Number: {2}{3}Vehical's state: {4}{5}Vehicle:{6}{7}{8}"
                 , m_ownerName, Environment.NewLine, m_ownerPhoneNumber, Environment.NewLine, m_vehicleState, Environment.NewLine, Environment.NewLine, m_vehicle.ToString(), Environment.NewLine);
         }
         

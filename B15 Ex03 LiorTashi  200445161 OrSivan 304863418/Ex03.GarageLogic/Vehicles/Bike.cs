@@ -11,20 +11,19 @@ namespace Ex03.GarageLogic.Vehicles
         private eLisenceType m_licenseType;
         private int m_motorVolume;
 
-        internal Bike(Models.VehicleModel i_Model) :
-            base(i_Model)
+        internal Bike() :
+            base()
         {
-            m_UniqParams = new List<ParamHolder>();
-            uniqParams.Add(new ParamHolder("Lisence Type", typeof(eLisenceType)));
-            uniqParams.Add(new ParamHolder("Motor Volume", typeof(int)));
+            m_UniqParams.Add(new ParamHolder("Lisence Type", typeof(eLisenceType))); m_numberOfBaseParams++;
+            m_UniqParams.Add(new ParamHolder("Motor Volume", typeof(int))); m_numberOfBaseParams++;
         }
 
 
         public override void ImplementUniqParams()
         {
             base.ImplementUniqParams();
-            m_licenseType = (eLisenceType)m_UniqParams[0].Value;
-            m_motorVolume = (int)m_UniqParams[1].Value;
+            m_licenseType = (eLisenceType)m_UniqParams[m_initParamCounter].Value; m_initParamCounter++;
+            m_motorVolume = (int)m_UniqParams[m_initParamCounter].Value; m_initParamCounter++;
         }
 
         public override string ToString()

@@ -103,9 +103,11 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
         {
             T enumToReturn;
             int inputNumber;
+            Console.WriteLine(getEnumValuesInList<T>());
 
             while (true)
             {
+               
                 string input = Console.ReadLine();
 
                 bool isNumber = int.TryParse(input, out inputNumber);
@@ -139,18 +141,16 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                         Console.WriteLine(e.Message);
                     }
                 }
-
             }
 
             return enumToReturn;
         }
 
         // returns a numbered list of the values in given T.
-        public static string getEnumValuesInList<T>(string i_EnterStr)
+        public static string getEnumValuesInList<T>()
         {
             StringBuilder listOfValues = new StringBuilder();
-            listOfValues.AppendLine(i_EnterStr);
-
+            
             int i = 0;
 
             foreach (Enum value in Enum.GetValues(typeof(T)))

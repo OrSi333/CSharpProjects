@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic.Enums;
-using Ex03.GarageLogic.Models;
+using Ex03.GarageLogic.VehicleComponents;
+using Ex03.GarageLogic.Vehicles;
 using Ex03.GarageLogic;
+using System.Reflection;
 
 namespace Ex3.GarageManagmentSystem.ConsoleUI
 {
     public class UserInterface
     {
         Garage m_Garage = new Garage();
+        VehiclesMaker m_vehicleMaker = new VehiclesMaker();
 
+        private const int k_ThreadSleepTime = 3000;
         private const string k_WelcomeMsg = "************Welcome to The Garage!************";
         private const string k_EnterModelName = "Enter the model name of the vehicle:";
         private const string k_EnterLicensePlate = "Enter the license plate of the vehicle:";
@@ -43,33 +47,10 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 7. Enter a vehicle license plate to see his details.
 8. Exit";
 
-
-        private string k_EnterVehicleStatus = UserInterfaceHandler.getEnumValuesInList<eVehicleStatus>("Choose status:");
-
-        private const string k_KindOfVehicle =
-
-            // should eVehicleType???!?
-@"What type of vehicle?
-1. Bike.
-2. Electric Bike.
-3. Car.
-4. Electric Car
-5. Truck.";
-
         private string k_CarryToxic =
 @"Does the truck carry toxic cargo? 
 1. Yes.
 2. No.";
-
-        private string k_ColorOfCar = UserInterfaceHandler.getEnumValuesInList<eColor>("The color of the car is?");
-
-        private string k_NumberOfDoors = UserInterfaceHandler.getEnumValuesInList<eNumberOfDoors>("Please enter the number of doors:");
-
-        private string k_BikeLicenseType = UserInterfaceHandler.getEnumValuesInList<eLisenceType>("What is the bike license type:");
-
-        private string k_FuleType = UserInterfaceHandler.getEnumValuesInList<eFuelType>("What is the vehicle fuel type?");
-
-
 
         public void openGarage()
         {
@@ -87,7 +68,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                     case 1:
                         enterNewVehicle();
                         Console.WriteLine(k_VehicleCreated);
-                        System.Threading.Thread.Sleep(3000);
+                        System.Threading.Thread.Sleep(k_ThreadSleepTime);
                         break;
                     case 2:
                         showList();
@@ -106,6 +87,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
                         break;
                     case 7:
                         seeVehicleDetails();
+                        Console.Read();
                         break;
                 }
             }
@@ -114,15 +96,19 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
         private void changeStateOfVehicle()
         {
             string licensePlate = getLicensePlate();
+            Console.WriteLine("Enter the desired status: ");
+            eVehicleStatus statusChange = UserInterfaceHandler.getUserInput<eVehicleStatus>();
 
+            try
+            {
+                m_Garage.changeVehicleState(licensePlate, statusChange);
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+                Console.ReadLine();
+            }
 
-            //if....
-            // need to check if the vehicle exist in the garage(also in the other methods below).
-
-            Console.WriteLine(k_EnterVehicleStatus);
-            eVehicleStatus vehicleStatus = UserInterfaceHandler.getUserInput<eVehicleStatus>();
-
-            // should call the getVehicleFromGarage() and set its status to the desired state above.
         }
 
 
@@ -141,7 +127,7 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
 
             if (!isElectric)
             {
-                Console.WriteLine(k_FuleType);
+                Console.WriteLine("Enter the type of fule: ");
                 fuelType = UserInterfaceHandler.getUserInput<eFuelType>();
                 Console.Clear();
             }
@@ -149,166 +135,210 @@ namespace Ex3.GarageManagmentSystem.ConsoleUI
             Console.WriteLine(k_EnterTheDesiredQuantityToReful);
             quantityToRefulOrCharge = UserInterfaceHandler.getUserInput<float>();
 
-            m_Garage.addFuelOrCharge(licensePlate, fuelType, quantityToRefulOrCharge);
+            try
+            {
+                m_Garage.addFuelOrCharge(licensePlate, fuelType, quantityToRefulOrCharge);
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+            }
+
         }
 
         private void inflateWheels()
         {
             string licensePlate = getLicensePlate();
 
-            m_Garage.inflateWheelsToMax(licensePlate);
+            try
+            {
+                m_Garage.inflateWheelsToMax(licensePlate);
+                Console.WriteLine("Wheels were successfully inflated. ");
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+            }
 
-            // should i print something ? 
+            System.Threading.Thread.Sleep(k_ThreadSleepTime);
         }
 
         private void showList()
         {
-            // need to call the getAllVehicles() from garage logic.
+            Console.WriteLine("Choose status filter: ");
+            Console.WriteLine("0. None");
+            Console.WriteLine(UserInterfaceHandler.getEnumValuesInList<eVehicleStatus>());
+
+            int numberOfValuesInEnum = Enum.GetNames(typeof(eVehicleStatus)).Length;
+            int chosenStatus = UserInterfaceHandler.getUserMenuSelection(0, numberOfValuesInEnum);
+
+            string licensePlateList = string.Empty;
+
+            switch (chosenStatus)
+            {
+                case 0:
+                    licensePlateList = m_Garage.getAllLisenceNumbers();
+                    break;
+                case 1:
+                    licensePlateList = m_Garage.getAllLisenceNumbers(eVehicleStatus.Fixed);
+                    break;
+                case 2:
+                    licensePlateList = m_Garage.getAllLisenceNumbers(eVehicleStatus.Paid);
+                    break;
+                case 3:
+                    licensePlateList = m_Garage.getAllLisenceNumbers(eVehicleStatus.Repairing);
+                    break;
+            }
+
+            Console.WriteLine(licensePlateList);
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
         }
 
         private void enterNewVehicle()
         {
-            Console.Clear();
-            creatNewVehicle();
-            Console.Out.WriteLine(k_KindOfVehicle);
-            // THIS SHOULD BE CHANGE, IF WE'LL SUPPORT A NEW VEHICLE TYPE THE SWITCH WILL FAIL HERE.
-            int userInput = UserInterfaceHandler.getUserMenuSelection(1, 5);
-
-            switch (userInput)
+            Console.WriteLine("Enter type of vehicle:");
+            VehiclesMaker.SupportedVehicle chosenVehicle = UserInterfaceHandler.getValidEnumValue<VehiclesMaker.SupportedVehicle>();
+            Vehicle vehicle;
+            m_vehicleMaker.makeVehicle(chosenVehicle, out vehicle);
+                
+            for (int i = 0; i < vehicle.UniqParams.Count; i++)
             {
-                case 1:
-                    createBike(false);
-                    break;
-                case 2:
-                    createBike(true);
-                    break;
-                case 3:
-                    createCar(false);
-                    break;
-                case 4:
-                    createCar(true);
-                    break;
-                case 5:
-                    createTruck();
-                    break;
-            }
-        }
-
-        private void creatNewVehicle()
-        {
-            string licensePlate = getLicensePlate();
-            string modelName = string.Empty;
-            float maxAirPressure = 0;
-            float maxQuantityOFfuel = 0;
-            string wheelManufucture = string.Empty;
-
-            Console.WriteLine(k_EnterModelName);
-            modelName = UserInterfaceHandler.getUserInput<string>();
-
-            Console.WriteLine(k_EnterMaximumAirPressure);
-            maxAirPressure = UserInterfaceHandler.getUserInput<float>();
-
-            Console.WriteLine(k_EnterCurrentAirPressure);
-
-            while (true)
-            {
-                float currentAirPressure = UserInterfaceHandler.getUserInput<float>();
-
-                if (currentAirPressure > maxAirPressure)
+                ParamHolder param = vehicle.UniqParams[i];
+                if (param.Value == null)
                 {
-                    Console.WriteLine(string.Format(k_ErrorOufOfBound, currentAirPressure, maxAirPressure));
-                    continue;
+                    Console.WriteLine(string.Format("Enter {0}", param.ToString()));
+                    param.Value = typeof(UserInterfaceHandler).GetMethod("getUserInput", BindingFlags.Static | BindingFlags.Public).MakeGenericMethod(param.ExpectedType).Invoke(null, new object[] { });
                 }
-
-                Console.Clear();
-                break;
             }
 
-            Console.WriteLine(k_EnterMaxQuantityOfEnergy);
-            maxQuantityOFfuel = UserInterfaceHandler.getUserInput<float>();
-            Console.Clear();
+            Console.WriteLine(k_EnterOwnersName);
+            string ownerName = UserInterfaceHandler.getUserInput<string>();
 
-            Console.WriteLine(k_EnterEnergyLeft);
+            Console.WriteLine(k_EnterOwnersPhoneNumber);
+            string ownerPhoneNumber = UserInterfaceHandler.getUserInput<string>();
 
-            while (true)
-            {
-                float energyLeft = UserInterfaceHandler.getUserInput<float>();
-
-                if (energyLeft > maxQuantityOFfuel)
-                {
-                    Console.WriteLine(k_ErrorOufOfBound, energyLeft, maxAirPressure);
-                    continue;
-                }
-
-                Console.Clear();
-                break;
-            }
-
-            Console.WriteLine(k_EnterWheelManifucture);
-            wheelManufucture = UserInterfaceHandler.getUserInput<string>();
-            Console.Clear();
+            vehicle.ImplementUniqParams();
+            m_Garage.addVehicleToGarage(vehicle, ownerName, ownerPhoneNumber);
         }
+        
 
-        private void createBike(bool i_isElectric)
-        {
-            eLisenceType? typeOfLicense = null;
-            int engineDisplacement = 0;
-            eFuelType? typeOfFuel = null;
+        
+        //private void creatNewVehicle()
+        //{
+        //    string licensePlate = getLicensePlate();
+        //    string modelName = string.Empty;
+        //    float maxAirPressure = 0;
+        //    float maxQuantityOFfuel = 0;
+        //    string wheelManufucture = string.Empty;
 
-            Console.WriteLine(k_BikeLicenseType);
-            typeOfLicense = UserInterfaceHandler.getValidEnumValue<eLisenceType>();
+        //    Console.WriteLine(k_EnterModelName);
+        //    modelName = UserInterfaceHandler.getUserInput<string>();
+
+        //    Console.WriteLine(k_EnterMaximumAirPressure);
+        //    maxAirPressure = UserInterfaceHandler.getUserInput<float>();
+
+        //    Console.WriteLine(k_EnterCurrentAirPressure);
+
+        //    while (true)
+        //    {
+        //        float currentAirPressure = UserInterfaceHandler.getUserInput<float>();
+
+        //        if (currentAirPressure > maxAirPressure)
+        //        {
+        //            Console.WriteLine(string.Format(k_ErrorOufOfBound, currentAirPressure, maxAirPressure));
+        //            continue;
+        //        }
+
+        //        Console.Clear();
+        //        break;
+        //    }
+
+        //    Console.WriteLine(k_EnterMaxQuantityOfEnergy);
+        //    maxQuantityOFfuel = UserInterfaceHandler.getUserInput<float>();
+        //    Console.Clear();
+
+        //    Console.WriteLine(k_EnterEnergyLeft);
+
+        //    while (true)
+        //    {
+        //        float energyLeft = UserInterfaceHandler.getUserInput<float>();
+
+        //        if (energyLeft > maxQuantityOFfuel)
+        //        {
+        //            Console.WriteLine(k_ErrorOufOfBound, energyLeft, maxAirPressure);
+        //            continue;
+        //        }
+
+        //        Console.Clear();
+        //        break;
+        //    }
+
+        //    Console.WriteLine(k_EnterWheelManifucture);
+        //    wheelManufucture = UserInterfaceHandler.getUserInput<string>();
+        //    Console.Clear();
+        //}
+
+        //private void createBike(bool i_isElectric)
+        //{
+        //    eLisenceType? typeOfLicense = null;
+        //    int engineDisplacement = 0;
+        //    eFuelType? typeOfFuel = null;
+
+        //    Console.WriteLine(k_BikeLicenseType);
+        //    typeOfLicense = UserInterfaceHandler.getValidEnumValue<eLisenceType>();
 
 
-            Console.Out.WriteLine(k_EnterEngineDisplacement);
-            engineDisplacement = UserInterfaceHandler.getUserInput<int>();
+        //    Console.Out.WriteLine(k_EnterEngineDisplacement);
+        //    engineDisplacement = UserInterfaceHandler.getUserInput<int>();
 
-            if (!i_isElectric)
-            {
-                Console.WriteLine(k_FuleType);
-                typeOfFuel = UserInterfaceHandler.getUserInput<eFuelType>();
-            }
-            else
-            {
+        //    if (!i_isElectric)
+        //    {
+        //        Console.WriteLine(k_FuleType);
+        //        typeOfFuel = UserInterfaceHandler.getUserInput<eFuelType>();
+        //    }
+        //    else
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
-        private void createCar(bool isElectric)
-        {
-            eColor? colorOfCar = null;
-            eNumberOfDoors? numberOfDoors = null;
-            eFuelType? typeOfFuel = null;
+        //private void createCar(bool isElectric)
+        //{
+        //    eColor? colorOfCar = null;
+        //    eNumberOfDoors? numberOfDoors = null;
+        //    eFuelType? typeOfFuel = null;
 
-            Console.WriteLine(k_ColorOfCar);
-            colorOfCar = UserInterfaceHandler.getUserInput<eColor>();
+        //    Console.WriteLine(k_ColorOfCar);
+        //    colorOfCar = UserInterfaceHandler.getUserInput<eColor>();
 
-            Console.WriteLine(k_NumberOfDoors);
-            numberOfDoors = UserInterfaceHandler.getUserInput<eNumberOfDoors>();
+        //    Console.WriteLine(k_NumberOfDoors);
+        //    numberOfDoors = UserInterfaceHandler.getUserInput<eNumberOfDoors>();
 
-            if (!isElectric)
-            {
-                Console.WriteLine(k_FuleType);
-                typeOfFuel = UserInterfaceHandler.getUserInput<eFuelType>();
-            }
-            else
-            {
+        //    if (!isElectric)
+        //    {
+        //        Console.WriteLine(k_FuleType);
+        //        typeOfFuel = UserInterfaceHandler.getUserInput<eFuelType>();
+        //    }
+        //    else
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
-        private void createTruck()
-        {
-            int carryToxic = 0;
-            float currentCurryLoad = 0;
+        //private void createTruck()
+        //{
+        //    int carryToxic = 0;
+        //    float currentCurryLoad = 0;
 
-            Console.WriteLine(k_CarryToxic);
-            carryToxic = UserInterfaceHandler.getUserInput<int>();
-            Console.Clear();
+        //    Console.WriteLine(k_CarryToxic);
+        //    carryToxic = UserInterfaceHandler.getUserInput<int>();
+        //    Console.Clear();
 
-            Console.WriteLine(k_EnterCurrentCurryLoad);
-            currentCurryLoad = UserInterfaceHandler.getUserInput<float>();
-            Console.Clear();
-        }
+        //    Console.WriteLine(k_EnterCurrentCurryLoad);
+        //    currentCurryLoad = UserInterfaceHandler.getUserInput<float>();
+        //    Console.Clear();
+        //}
 
 
         private static string getLicensePlate()

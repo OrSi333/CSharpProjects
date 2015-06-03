@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Ex03.GarageLogic.VehicleComponents
 {
-    class ElectricEngine : Engine
+    public class ElectricEngine : Engine
     {
 
-        internal ElectricEngine(float i_MaxPowerTime) :
-            base(i_MaxPowerTime)
+        public ElectricEngine() :
+            base()
         {
             
         }

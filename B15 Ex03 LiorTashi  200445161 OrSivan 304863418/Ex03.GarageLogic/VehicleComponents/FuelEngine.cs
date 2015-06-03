@@ -5,16 +5,21 @@ using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic.VehicleComponents
 {
-    internal class FuelEngine : Engine
+    public class FuelEngine : Engine
     {
         private eFuelType m_fuelType;
 
-        internal FuelEngine(float i_MaxFuelCapacity, eFuelType i_FuelType) :
-            base(i_MaxFuelCapacity)
+        public FuelEngine() :
+            base()
         {
-            m_fuelType = i_FuelType;
+            
         }
 
+        public eFuelType FuelType
+        {
+            get { return m_fuelType; }
+            set { m_fuelType = value; }
+        }
 
         public void addFuel(float i_FuelToAdd, eFuelType i_FuelType)
         {
@@ -28,14 +33,6 @@ namespace Ex03.GarageLogic.VehicleComponents
                 throw new ValueOutOfRangeException(m_CurrentQuantity, m_MaxCapacity, i_FuelToAdd);
             }
             base.addQuantity(i_FuelToAdd);
-        }
-
-        internal eFuelType FuelType
-        {
-            get
-            {
-                return m_fuelType;
-            }
         }
 
         public override string ToString()

@@ -10,19 +10,18 @@ namespace Ex03.GarageLogic.Vehicles
         private bool m_isCarringDangerMat;
         private float m_currBagageWeight;
 
-        internal Truck(Models.VehicleModel i_Model):
-            base(i_Model)
+        internal Truck():
+            base()
         {
-            m_UniqParams = new List<ParamHolder>();
-            m_UniqParams.Add("Is carring hazard materials?", typeof(bool));
-            m_UniqParams.Add("Current bagage wight", typeof(float));
+            m_UniqParams.Add(new ParamHolder("Is carring hazard materials?", typeof(bool))); m_numberOfBaseParams++;
+            m_UniqParams.Add(new ParamHolder("Current bagage wight", typeof(float))); m_numberOfBaseParams++;
         }
 
         public override void ImplementUniqParams()
         {
-            base.m_UniqParams();
-            m_isCarringDangerMat = (bool)m_UniqParams[0];
-            m_currBagageWeight = (float)m_UniqParams[1];
+            base.ImplementUniqParams();
+            m_isCarringDangerMat = (bool)(m_UniqParams[m_initParamCounter].Value); m_initParamCounter++;
+            m_currBagageWeight = (float)(m_UniqParams[m_initParamCounter].Value); m_initParamCounter++;
         }
 
         public override string ToString()

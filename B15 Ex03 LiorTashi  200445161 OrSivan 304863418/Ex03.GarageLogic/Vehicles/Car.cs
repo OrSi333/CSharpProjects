@@ -9,20 +9,19 @@ namespace Ex03.GarageLogic.Vehicles
         private eColor m_carColor;
         private eNumberOfDoors m_numOfDoors;
 
-        internal Car(Models.VehicleModel i_Model):
-            base(i_Model)
+        internal Car():
+            base()
         {
-            m_UniqParams = new List<ParamHolder>();
-            m_UniqParams.Add(new ParamHolder("Car Color", typeof(eColor)));
-            m_UniqParams.Add(new ParamHolder("Number of doors", typeof(eNumberOfDoors)));
+            m_UniqParams.Add(new ParamHolder("Car Color", typeof(eColor))); m_numberOfBaseParams++;
+            m_UniqParams.Add(new ParamHolder("Number of doors", typeof(eNumberOfDoors))); m_numberOfBaseParams++;
 
         }
 
         public override void ImplementUniqParams()
         {
             base.ImplementUniqParams();
-            m_carColor = (eColor)m_UniqParams[0];
-            m_numOfDoors = (eNumberOfDoors)m_UniqParams[1];
+            m_carColor = (eColor)(m_UniqParams[m_numberOfBaseParams].Value); m_numberOfBaseParams++;
+            m_numOfDoors = (eNumberOfDoors)(m_UniqParams[m_numberOfBaseParams].Value); m_numberOfBaseParams++;
         }
         
         public override string ToString()
